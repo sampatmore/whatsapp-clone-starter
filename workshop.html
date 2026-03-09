@@ -185,13 +185,8 @@
     white-space: nowrap;
   }
 
-  .hour-badge.hour0 { background: #DFEAF5; color: #4A7FB5; }
   .hour-badge.hour1 { background: var(--success-bg); color: var(--success); }
   .hour-badge.hour2 { background: var(--warning-bg); color: var(--warning); }
-
-  @media (prefers-color-scheme: dark) {
-    .hour-badge.hour0 { background: #1A2A3A; color: #7EB3E0; }
-  }
 
   /* ---- Cards ---- */
   .card {
@@ -524,48 +519,13 @@
     border-color: var(--warning);
   }
 
-  /* ---- Switching section ---- */
-  .switch-card {
-    background: var(--bg-card);
-    border: 1.5px solid var(--warning);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    margin: 1.5rem 0;
-    position: relative;
-  }
-
-  .switch-card::before {
-    content: 'Action Required';
-    position: absolute;
-    top: -0.5rem;
-    left: 1rem;
-    background: var(--warning);
-    color: white;
-    font-size: 0.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: 0.15rem 0.55rem;
-    border-radius: 4px;
-  }
-
-  .switch-card h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    letter-spacing: -0.01em;
-  }
-
-  .switch-card ol { padding-left: 1.5rem; margin: 0.75rem 0; }
-  .switch-card li { font-size: 0.88rem; margin-bottom: 0.5rem; }
-
   /* ---- Dialog styles ---- */
   dialog {
     border: none;
     border-radius: var(--radius);
     box-shadow: 0 8px 32px rgba(20,20,19,0.12);
     padding: 0;
-    max-width: 560px;
+    max-width: 640px;
     width: 90%;
     background: var(--bg-card);
     color: var(--text);
@@ -650,6 +610,26 @@
     letter-spacing: -0.01em;
   }
 
+  /* ---- Cheat sheet table ---- */
+  .cheat-table {
+    width: 100%;
+    font-size: 0.82rem;
+    border-collapse: collapse;
+    margin: 0.5rem 0;
+  }
+  .cheat-table th, .cheat-table td {
+    padding: 0.4rem 0.6rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .cheat-table th {
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
   /* ---- Utilities ---- */
   .sr-only {
     position: absolute;
@@ -702,7 +682,7 @@
       <span class="header-badge">Workshop</span>
     </div>
     <div class="progress-bar-container">
-      <span id="progressText">0 / 5</span>
+      <span id="progressText">0 / 9</span>
       <div class="progress-bar">
         <div class="progress-bar-fill" id="progressFill" style="width: 0%"></div>
       </div>
@@ -732,17 +712,13 @@
     <h3>Setup</h3>
     <ol>
       <li>
-        Open your terminal in the project root. Create a <code>.env</code> file (or update the existing one) with the real API URLs:
-        <pre><code>VITE_API_BASE_URL=https://backend-production-12809.up.railway.app
-VITE_WS_URL=wss://backend-production-12809.up.railway.app/ws</code></pre>
-      </li>
-      <li>
         Install dependencies:
         <pre><code>pnpm install</code></pre>
       </li>
       <li>
-        Launch Claude Code:
-        <pre><code>claude</code></pre>
+        Open your terminal in the project root and launch Claude Code:
+        <pre><code>cd /path/to/whatsapp-clone-starter
+claude</code></pre>
       </li>
     </ol>
   </div>
@@ -761,65 +737,251 @@ VITE_WS_URL=wss://backend-production-12809.up.railway.app/ws</code></pre>
     </ul>
   </div>
 
-  <!-- ============ HOUR 0 ============ -->
+  <!-- ============ HOUR 1 ============ -->
   <div class="section-label">
-    <span class="hour-badge hour0">Hour 0</span>
-    <h2>Configuring Claude Code (~30 min)</h2>
+    <span class="hour-badge hour1">Hour 1</span>
+    <h2>Mastering Claude Code (~60 min)</h2>
   </div>
 
-  <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1.25rem;">Before writing any code, configure Claude Code so it understands your project and has the right tools available.</p>
+  <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1.25rem;">Learn every Claude Code command and feature. Build two UI features as practice vehicles. Create agents, skills, and hooks &mdash; and put them to work immediately.</p>
 
-  <!-- Step 1: CLAUDE.md -->
-  <div class="info-card">
-    <h3>Step 1: Create a CLAUDE.md File (~10 min)</h3>
-    <p style="font-size:0.9rem;margin-bottom:0.75rem;">A <code>CLAUDE.md</code> file is a project instruction file that Claude Code reads automatically every time it starts. It tells Claude about your stack, file structure, conventions, and key patterns &mdash; so you do not have to repeat context in every prompt.</p>
-    <p style="font-size:0.9rem;margin-bottom:0.75rem;">Open Claude Code in the project directory and run the <code>/init</code> command:</p>
+  <!-- ===== STEP 1: Foundation ===== -->
+  <div class="card" id="feature-1" data-feature="1">
+    <div class="card-header" onclick="toggleCard(this.parentElement)">
+      <div class="card-number"><span>1</span></div>
+      <div class="card-info">
+        <div class="card-title">Foundation &mdash; /model, /init, CLAUDE.md, /memory</div>
+        <div class="card-meta">~10 min &middot; Project setup, configuration &amp; first change</div>
+      </div>
+      <div class="card-chevron">&#x276F;</div>
+    </div>
+    <div class="card-body">
+      <p>Before writing any code, configure Claude Code so it understands your project.</p>
 
-    <div class="prompt-box">
-      <span class="prompt-label">Claude Code</span>
-      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+      <h3>/init &mdash; Generate CLAUDE.md</h3>
+      <p><code>CLAUDE.md</code> is a project instruction file that Claude Code reads automatically every time it starts. It tells Claude about your stack, file structure, conventions, and key patterns &mdash; so you don't have to repeat context in every prompt.</p>
+      <p>Run the <code>/init</code> command to have Claude scan the project and generate it:</p>
+      <div class="prompt-box">
+        <span class="prompt-label">Claude Code</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
 /init</div>
 
-    <p style="font-size:0.9rem;margin-top:0.75rem;margin-bottom:0.75rem;">This command tells Claude to scan the entire project and generate a <code>CLAUDE.md</code> automatically. It will analyze the file structure, dependencies, and code patterns to produce a comprehensive project summary.</p>
+      <p style="margin-top:0.75rem;">Review the generated file and make sure it captures these key points:</p>
+      <ul>
+        <li>The icon library is <code>@hugeicons/react</code> + <code>@hugeicons/core-free-icons</code> (NOT lucide)</li>
+        <li>shadcn/ui components live in <code>src/components/ui/</code></li>
+        <li>File-based routing with TanStack Router</li>
+        <li>Query patterns in <code>src/queries/</code>, API functions in <code>src/lib/api/</code></li>
+      </ul>
 
-    <p style="font-size:0.9rem;margin-bottom:0.75rem;">Once it generates the file, <strong>review it</strong> and make sure it captures these key points. If anything is missing, ask Claude to add it:</p>
-    <ul style="font-size:0.88rem;padding-left:1.5rem;margin-bottom:0.75rem;">
-      <li>The icon library is <code>@hugeicons/react</code> + <code>@hugeicons/core-free-icons</code> (NOT lucide or heroicons)</li>
-      <li>shadcn/ui components live in <code>src/components/ui/</code></li>
-      <li>File-based routing with TanStack Router</li>
-      <li>Query patterns in <code>src/queries/</code>, API functions in <code>src/lib/api/</code></li>
-    </ul>
+      <h3>/model &mdash; Switch between models</h3>
+      <p>Claude Code can switch models mid-conversation. Each model has different strengths:</p>
+      <ul>
+        <li><strong>Opus</strong> &mdash; Complex reasoning, architecture, multi-file changes</li>
+        <li><strong>Sonnet</strong> &mdash; Fast day-to-day coding, feature implementation</li>
+        <li><strong>Haiku</strong> &mdash; Quick questions, simple edits, explaining code</li>
+      </ul>
+      <div class="prompt-box">
+        <span class="prompt-label">Claude Code</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+/model</div>
+      <p style="margin-top:0.5rem;">Try switching to Sonnet for the feature work ahead.</p>
 
-    <details class="hints-toggle">
-      <summary>What is CLAUDE.md?</summary>
-      <div class="hints-content">
-        <ul>
-          <li><code>CLAUDE.md</code> lives at the root of your project and is loaded into Claude's context automatically</li>
-          <li>It acts like a "system prompt" for your codebase &mdash; Claude reads it before every interaction</li>
-          <li>It should contain facts about the project, not instructions on how to code</li>
-          <li>You can also create a <code>.claude/</code> directory for additional configuration (agents, settings)</li>
-        </ul>
+      <h3>/memory &mdash; Persistent memories</h3>
+      <p>Claude Code can save things across sessions via <code>/memory</code>. Memories persist even after <code>/clear</code>. Use it for conventions Claude should always remember.</p>
+      <p>Exercise: ask Claude to remember a project convention, then verify:</p>
+      <div class="prompt-box">
+        <span class="prompt-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+Remember that this project uses @hugeicons/react and @hugeicons/core-free-icons for icons. Never use lucide-react or heroicons.</div>
+      <p style="margin-top:0.5rem;">Then check with <code>/memory</code> to see it was saved.</p>
+
+      <details class="hints-toggle">
+        <summary>What is CLAUDE.md?</summary>
+        <div class="hints-content">
+          <ul>
+            <li><code>CLAUDE.md</code> lives at the root of your project and is loaded into Claude's context automatically</li>
+            <li>It acts like a "system prompt" for your codebase &mdash; Claude reads it before every interaction</li>
+            <li>It should contain facts about the project, not instructions on how to code</li>
+            <li>You can also create a <code>.claude/</code> directory for additional configuration (agents, settings, skills)</li>
+          </ul>
+        </div>
+      </details>
+
+      <h3>Quick exercise: Anthropic color palette</h3>
+      <p>Put your new setup to work with a small visual change. The app currently uses WhatsApp's green color scheme &mdash; rebrand it to Anthropic's palette. This is your first real prompt to Claude with full project context from CLAUDE.md.</p>
+      <div class="prompt-box">
+        <span class="prompt-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+Change the app's color palette from WhatsApp green to Anthropic brand colors. Look up the Anthropic brand palette and apply it — update the primary/accent color, backgrounds, borders, and dark mode variants. Find where the app defines its color theme and update it.</div>
+
+      <div class="callout" style="margin:0.75rem 0;">
+        <span class="callout-icon">&#x1f4a1;</span>
+        <div><strong>Prompting lesson:</strong> You don't need to hand Claude every detail. It can research brand colors and find where the theme is defined. Start simple &mdash; if the result isn't right, iterate.</div>
       </div>
-    </details>
 
-    <h3>What you should see</h3>
-    <ul class="checklist" data-feature="step1">
-      <li onclick="toggleCheck(this)">A <code>CLAUDE.md</code> file appears in the project root</li>
-      <li onclick="toggleCheck(this)">It mentions the tech stack (React 19, Vite, TanStack, shadcn, Tailwind v4)</li>
-      <li onclick="toggleCheck(this)">It mentions the icon library convention (@hugeicons, not lucide)</li>
-      <li onclick="toggleCheck(this)">It lists key directories and their purpose</li>
-    </ul>
+      <h3>What you should see</h3>
+      <ul class="checklist" data-feature="1">
+        <li onclick="toggleCheck(this)">A <code>CLAUDE.md</code> file appears in the project root with correct stack info</li>
+        <li onclick="toggleCheck(this)"><code>/model</code> shows available models and lets you switch</li>
+        <li onclick="toggleCheck(this)">A memory was saved about the icon convention</li>
+        <li onclick="toggleCheck(this)"><code>/memory</code> shows the saved memory</li>
+        <li onclick="toggleCheck(this)">The app's color palette changed from green to Anthropic terracotta/warm tones</li>
+      </ul>
+
+      <button class="complete-btn" onclick="markComplete(1, this)">Mark as Complete</button>
+    </div>
   </div>
 
-  <!-- Step 2: MCP Servers -->
-  <div class="info-card">
-    <h3>Step 2: Set Up MCP Servers (~5 min)</h3>
-    <p style="font-size:0.9rem;margin-bottom:0.75rem;">MCP (Model Context Protocol) servers give Claude Code extra capabilities beyond reading and writing files. You will add three servers using a single config file.</p>
+  <!-- ===== STEP 2: Plan Mode ===== -->
+  <div class="card" id="feature-2" data-feature="2">
+    <div class="card-header" onclick="toggleCard(this.parentElement)">
+      <div class="card-number"><span>2</span></div>
+      <div class="card-info">
+        <div class="card-title">Plan Mode &amp; Extended Thinking</div>
+        <div class="card-meta">~5 min &middot; Design before coding</div>
+      </div>
+      <div class="card-chevron">&#x276F;</div>
+    </div>
+    <div class="card-body">
+      <p>Before building, learn how to make Claude <em>think before it acts</em>.</p>
 
-    <p style="font-size:0.9rem;margin-bottom:0.5rem;">Create a <code>.mcp.json</code> file in the project root with the following content:</p>
-    <div class="prompt-box">
-      <span class="prompt-label">.mcp.json</span>
-      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+      <h3>Plan mode</h3>
+      <p>Claude can explore the codebase, design an approach, and ask for your approval before writing any code. Activate it by asking Claude to "plan this first" on any complex task. Claude will:</p>
+      <ol>
+        <li>Read relevant files to understand the current state</li>
+        <li>Produce a step-by-step implementation plan</li>
+        <li>Wait for your approval before making changes</li>
+      </ol>
+
+      <h3>Extended thinking</h3>
+      <p>Trigger deeper reasoning with phrases in your prompt:</p>
+      <ul>
+        <li><code>think</code> &mdash; Standard reasoning</li>
+        <li><code>think hard</code> &mdash; Deeper analysis</li>
+        <li><code>ultrathink</code> &mdash; Maximum reasoning depth (best for architecture and debugging)</li>
+      </ul>
+
+      <h3>Quick demo</h3>
+      <p>Ask Claude to plan the emoji picker feature you will build in Step 3:</p>
+      <div class="prompt-box">
+        <span class="prompt-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+Think hard and plan how you would add an emoji picker to the chat message input. Don't implement yet &mdash; just show me the plan.</div>
+      <p style="margin-top:0.5rem;">Observe the plan output. When you approve it, Claude will transition to implementation in the next step.</p>
+
+      <div class="callout" style="margin:0.75rem 0;">
+        <span class="callout-icon">&#x1f4a1;</span>
+        <div><strong>Prompting lesson:</strong> Plan mode is most useful for multi-file features. For simple one-file changes, just ask directly.</div>
+      </div>
+
+      <h3>What you should see</h3>
+      <ul class="checklist" data-feature="2">
+        <li onclick="toggleCheck(this)">Claude produced a plan without writing code</li>
+        <li onclick="toggleCheck(this)">The plan identifies which files to create/modify</li>
+        <li onclick="toggleCheck(this)">You understand how to trigger different thinking levels</li>
+      </ul>
+
+      <button class="complete-btn" onclick="markComplete(2, this)">Mark as Complete</button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 3: Context, Cleanup & Emoji Picker ===== -->
+  <div class="card" id="feature-3" data-feature="3">
+    <div class="card-header" onclick="toggleCard(this.parentElement)">
+      <div class="card-number"><span>3</span></div>
+      <div class="card-info">
+        <div class="card-title">Context, Cleanup &amp; Build Emoji Picker</div>
+        <div class="card-meta">~10 min &middot; /context, /compact, /clear, bash mode, @file</div>
+      </div>
+      <div class="card-chevron">&#x276F;</div>
+    </div>
+    <div class="card-body">
+      <p>Learn how to manage Claude's context window, then build your first feature.</p>
+
+      <h3>/context &mdash; Add files to context</h3>
+      <p>Explicitly add files or URLs to Claude's context so it has the full picture before you ask for changes:</p>
+      <div class="prompt-box">
+        <span class="prompt-label">Claude Code</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+/context</div>
+      <p style="margin-top:0.5rem;">Add <code>src/components/chat/chat-panel.tsx</code> to the context. You can also reference files inline using <code>@</code> mentions: <code>@src/components/chat/chat-panel.tsx</code></p>
+
+      <h3>/compact &mdash; Compress conversation</h3>
+      <p>After working for a while, your conversation context gets long. <code>/compact</code> summarizes it to free up space while retaining key facts. Use it between features.</p>
+
+      <h3>/clear &mdash; Reset entirely</h3>
+      <p>Wipes the entire conversation. CLAUDE.md reloads automatically, but all conversation history is gone. Use between major tasks.</p>
+
+      <h3>Bash mode</h3>
+      <p>Claude can run shell commands for you. Start the dev server:</p>
+      <div class="prompt-box">
+        <span class="prompt-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+Start the dev server with pnpm dev</div>
+
+      <h3>Exercise: Build the Emoji Picker</h3>
+      <p>The message input currently has only a text field and send button. Add an emoji picker button that opens a popover with categorized emojis.</p>
+
+      <details class="hints-toggle">
+        <summary>Prompt</summary>
+        <div class="hints-content">
+          <div class="prompt-box">
+            <span class="prompt-label">Prompt</span>
+            <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+Add an emoji picker to the chat message input in ChatPanel. Place a smiley face icon button to the left of the text input. Clicking it should open a shadcn Popover (side="top") with categorized emoji tabs (Smileys, People, Animals, Food, Travel, Objects, Symbols). Each category shows a grid of hardcoded emoji strings. Clicking an emoji inserts it into the message input and keeps the popover open. Do not use any third-party emoji picker library — build it with hardcoded emoji strings and shadcn/ui primitives only. Create a new EmojiPicker component in src/components/chat/ and integrate it into ChatPanel.</div>
+        </div>
+      </details>
+
+      <details class="hints-toggle">
+        <summary>Hints &amp; key files</summary>
+        <div class="hints-content">
+          <ul>
+            <li><code>ChatPanel</code> is in <code>src/components/chat/chat-panel.tsx</code> &mdash; manages <code>inputValue</code> state</li>
+            <li>The input uses <code>InputGroup</code>, <code>InputGroupAddon</code>, <code>InputGroupInput</code></li>
+            <li>No emoji library needed &mdash; hardcoded emoji strings work fine</li>
+            <li>Use shadcn <code>Popover</code> with <code>side="top"</code> so it opens above the input</li>
+          </ul>
+        </div>
+      </details>
+
+      <p style="margin-top:0.75rem;"><strong>After building:</strong> Run <code>/compact</code> to compress the conversation. Observe how Claude retains project knowledge via CLAUDE.md even after compacting.</p>
+
+      <div class="callout" style="margin:0.75rem 0;">
+        <span class="callout-icon">&#x1f4a1;</span>
+        <div><strong>Prompting lesson:</strong> When describing UI, focus on <em>behavior</em> not implementation. Say "opens a popover above the input with emoji categories" rather than trying to dictate the code structure.</div>
+      </div>
+
+      <h3>What you should see</h3>
+      <ul class="checklist" data-feature="3">
+        <li onclick="toggleCheck(this)">A smiley face icon button appears to the left of the message input</li>
+        <li onclick="toggleCheck(this)">Clicking it opens a popover above the input with emoji categories</li>
+        <li onclick="toggleCheck(this)">Clicking an emoji inserts it into the message input field</li>
+        <li onclick="toggleCheck(this)"><code>/compact</code> compressed the conversation successfully</li>
+      </ul>
+
+      <button class="complete-btn" onclick="markComplete(3, this)">Mark as Complete</button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 4: MCP & UI Testing ===== -->
+  <div class="card" id="feature-4" data-feature="4">
+    <div class="card-header" onclick="toggleCard(this.parentElement)">
+      <div class="card-number"><span>4</span></div>
+      <div class="card-info">
+        <div class="card-title">MCP, Permissions &amp; UI Testing</div>
+        <div class="card-meta">~10 min &middot; MCP servers, /permissions, chrome-devtools</div>
+      </div>
+      <div class="card-chevron">&#x276F;</div>
+    </div>
+    <div class="card-body">
+      <p>MCP (Model Context Protocol) servers give Claude Code extra capabilities beyond reading and writing files. You will add three servers and immediately use one to test the emoji picker you just built.</p>
+
+      <h3>MCP setup</h3>
+      <p>Create a <code>.mcp.json</code> file in the project root:</p>
+      <div class="prompt-box">
+        <span class="prompt-label">.mcp.json</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
 {
   "mcpServers": {
     "context7": {
@@ -837,227 +999,179 @@ VITE_WS_URL=wss://backend-production-12809.up.railway.app/ws</code></pre>
   }
 }</div>
 
-    <p style="font-size:0.9rem;margin-top:1rem;margin-bottom:0.75rem;">This file is read automatically by Claude Code when it starts. Restart Claude Code (exit and run <code>claude</code> again), then verify the servers are connected:</p>
-    <div class="prompt-box">
-      <span class="prompt-label">Claude Code</span>
-      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+      <p style="margin-top:0.75rem;">Restart Claude Code (exit and run <code>claude</code> again), then verify:</p>
+      <div class="prompt-box">
+        <span class="prompt-label">Claude Code</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
 /mcp</div>
 
-    <details class="hints-toggle">
-      <summary>What these servers do</summary>
-      <div class="hints-content">
-        <ul>
-          <li><strong>Context7:</strong> Fetches up-to-date library documentation so Claude uses current APIs, not outdated patterns</li>
-          <li><strong>Playwright:</strong> Browser automation for testing UI &mdash; Claude can navigate your app, click buttons, and take screenshots</li>
-          <li><strong>Chrome DevTools:</strong> Inspects a live Chrome tab for console logs, network requests, and performance</li>
-        </ul>
-      </div>
-    </details>
-
-    <h3>What you should see</h3>
-    <ul class="checklist" data-feature="step2">
-      <li onclick="toggleCheck(this)">Running <code>/mcp</code> in Claude Code shows <strong>context7</strong> as connected</li>
-      <li onclick="toggleCheck(this)">Running <code>/mcp</code> shows <strong>playwright</strong> as connected</li>
-      <li onclick="toggleCheck(this)">Running <code>/mcp</code> shows <strong>chrome-devtools</strong> as connected</li>
-    </ul>
-  </div>
-
-  <!-- Step 3: Custom Agents -->
-  <div class="info-card">
-    <h3>Step 3: Create Custom Agents (~10 min)</h3>
-    <p style="font-size:0.9rem;margin-bottom:0.75rem;">Custom agents are specialized Claude Code personas. Each agent is a <code>.md</code> file in <code>.claude/agents/</code> that acts as a system prompt &mdash; it shapes what the agent knows, how it behaves, and which tools it can use. You switch between agents with the <code>/agents</code> command.</p>
-
-    <p style="font-size:0.9rem;margin-bottom:0.75rem;">You will create three agents. For each one, ask Claude Code to create the agent file. Describe the agent's <strong>role</strong> in a sentence or two and let Claude figure out the rest.</p>
-
-    <p style="font-size:0.9rem;margin-bottom:0.5rem;"><strong>1. Frontend Specialist</strong> (<code>.claude/agents/frontend-specialist.md</code>)</p>
-    <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:1rem;">A coding agent that is an expert in this project's stack and conventions. This will be your main agent for building features in Hour 1 &amp; 2.</p>
-
-    <p style="font-size:0.9rem;margin-bottom:0.5rem;"><strong>2. Code Reviewer</strong> (<code>.claude/agents/code-reviewer.md</code>)</p>
-    <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:1rem;">A read-only reviewer that analyzes code without modifying it. You can use it after each feature to get feedback.</p>
-
-    <p style="font-size:0.9rem;margin-bottom:0.5rem;"><strong>3. QA Tester</strong> (<code>.claude/agents/qa-tester.md</code>)</p>
-    <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:1rem;">A testing agent that drives the browser to verify features work. It takes screenshots and checks for console errors.</p>
-
-    <p style="font-size:0.9rem;margin-bottom:0.75rem;">After creating all three, verify they appear:</p>
-    <div class="prompt-box">
-      <span class="prompt-label">Claude Code</span>
-      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
-/agents</div>
-
-    <details class="hints-toggle">
-      <summary>Tips for writing good agent prompts</summary>
-      <div class="hints-content">
-        <ul>
-          <li><strong>Role first:</strong> Start with what the agent <em>is</em> ("You are a senior code reviewer") not what it does</li>
-          <li><strong>Constrain tools:</strong> A reviewer should only read, never write. A tester needs Playwright MCP tools. Mention what tools are allowed or forbidden</li>
-          <li><strong>Define output format:</strong> Tell the reviewer how to report issues (severity, location, recommendation). Tell the tester how to report results (pass/fail with screenshots)</li>
-          <li><strong>Don't repeat CLAUDE.md:</strong> Agents automatically inherit the project context from your <code>CLAUDE.md</code>. You do not need to list key folders, the tech stack, or conventions again &mdash; just define the persona and behavior</li>
-          <li><strong>Keep it short:</strong> Agent files do not need to be long &mdash; a few focused paragraphs is plenty</li>
-        </ul>
-      </div>
-    </details>
-
-    <details class="hints-toggle">
-      <summary>When will you use these agents?</summary>
-      <div class="hints-content">
-        <ul>
-          <li><strong>Frontend Specialist:</strong> Use it during Hour 1 &amp; 2 to implement features with full project context</li>
-          <li><strong>Code Reviewer:</strong> After completing a feature, switch to the reviewer to get feedback on your code</li>
-          <li><strong>QA Tester:</strong> After implementing a feature, have the QA agent test it in the browser to catch issues you might miss</li>
-          <li>Switch between agents using <code>/agents</code> in Claude Code</li>
-        </ul>
-      </div>
-    </details>
-
-    <h3>What you should see</h3>
-    <ul class="checklist" data-feature="step3">
-      <li onclick="toggleCheck(this)">Three <code>.md</code> files exist in <code>.claude/agents/</code></li>
-      <li onclick="toggleCheck(this)">Running <code>/agents</code> shows all three agents: frontend-specialist, code-reviewer, qa-tester</li>
-      <li onclick="toggleCheck(this)">You can select an agent from the list to activate it</li>
-    </ul>
-  </div>
-
-  <!-- Step 4: Custom Skills -->
-  <div class="info-card">
-    <h3>Step 4: Create a Custom Skill (~5 min)</h3>
-    <p style="font-size:0.9rem;margin-bottom:0.75rem;">Skills are reusable slash commands you can invoke anytime with <code>/skill-name</code>. Each skill is a <code>.md</code> file in <code>.claude/skills/</code> that defines a prompt template Claude will follow when triggered.</p>
-
-    <p style="font-size:0.9rem;margin-bottom:0.75rem;">Create a <strong>commit</strong> skill that commits your changes following the <a href="https://www.conventionalcommits.org/" target="_blank" style="color:var(--whatsapp-green);">Conventional Commits</a> specification:</p>
-
-    <p style="font-size:0.9rem;margin-bottom:0.5rem;"><strong>Commit Skill</strong> (<code>.claude/skills/commit.md</code>)</p>
-    <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:1rem;">A skill that stages and commits changes using Conventional Commits format (e.g. <code>feat:</code>, <code>fix:</code>, <code>refactor:</code>, <code>docs:</code>). It should look at the current diff, pick the right type and scope, and write a clear commit message.</p>
-
-    <p style="font-size:0.9rem;margin-bottom:0.75rem;">Ask Claude Code to create this skill file for you, then verify it works:</p>
-    <div class="prompt-box">
-      <span class="prompt-label">Claude Code</span>
-      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
-/commit</div>
-
-    <details class="hints-toggle">
-      <summary>Tip: another useful skill idea</summary>
-      <div class="hints-content">
-        <p style="font-size:0.88rem;">You can also create a <strong>changes</strong> skill (<code>.claude/skills/changes.md</code>) that lists and summarizes all current changes in the repo &mdash; staged, unstaged, and untracked files. This is handy to get a quick overview of what you have been working on before committing.</p>
-      </div>
-    </details>
-
-    <h3>What you should see</h3>
-    <ul class="checklist" data-feature="step4">
-      <li onclick="toggleCheck(this)">A <code>commit.md</code> file exists in <code>.claude/skills/</code></li>
-      <li onclick="toggleCheck(this)">Running <code>/commit</code> stages changes and creates a commit with a Conventional Commits message</li>
-    </ul>
-  </div>
-
-  <!-- ============ HOUR 1 ============ -->
-  <div class="section-label">
-    <span class="hour-badge hour1">Hour 1</span>
-    <h2>Building Features (~1 hour)</h2>
-  </div>
-
-  <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1.25rem;">All features connect to the live backend API. Your data is real &mdash; you will see contacts and chats from other workshop participants.</p>
-
-  <!-- Feature 1 -->
-  <div class="card" id="feature-1" data-feature="1">
-    <div class="card-header" onclick="toggleCard(this.parentElement)">
-      <div class="card-number"><span>1</span></div>
-      <div class="card-info">
-        <div class="card-title">Emoji Picker</div>
-        <div class="card-meta">~10 min &middot; Popover, Tabs, Input Integration</div>
-      </div>
-      <div class="card-chevron">&#x276F;</div>
-    </div>
-    <div class="card-body">
-      <p>The message input currently has only a text field and send button. Add an emoji picker button that opens a popover with categorized emojis.</p>
-
-      <h3>How to prompt this</h3>
-      <p style="font-size:0.88rem;margin-bottom:0.75rem;">Describe the UI you want and where it goes:</p>
-      <ul style="font-size:0.88rem;padding-left:1.5rem;margin-bottom:0.5rem;">
-        <li>Placement: where does the button go relative to the message input?</li>
-        <li>Behavior: what opens? What's inside? (categories with emoji grids)</li>
-        <li>Integration: what happens when an emoji is clicked? (inserted into the input)</li>
-        <li>Suggest a new component file and how it connects to <code>ChatPanel</code></li>
-        <li><strong>Do not use any third-party emoji picker library</strong> &mdash; build it with hardcoded emoji strings and shadcn/ui primitives</li>
+      <h3>What each server does</h3>
+      <ul>
+        <li><strong>context7:</strong> Fetches up-to-date library documentation so Claude uses current APIs, not outdated patterns</li>
+        <li><strong>playwright:</strong> Browser automation &mdash; Claude navigates your app, clicks buttons, and takes screenshots</li>
+        <li><strong>chrome-devtools:</strong> Inspects a live Chrome tab for console logs, network requests, DOM elements, and performance</li>
       </ul>
+
+      <h3>/permissions &mdash; Control tool access</h3>
+      <p>View and manage what Claude can do automatically vs. what needs your approval:</p>
+      <div class="prompt-box">
+        <span class="prompt-label">Claude Code</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+/permissions</div>
+
+      <h3>/install-github-app</h3>
+      <p>Installs the Claude GitHub App for automated PR reviews. Useful for teams but optional in this workshop.</p>
+
+      <h3>Exercise: Test the Emoji Picker with chrome-devtools</h3>
+      <p>Open the app in Chrome (http://localhost:5173) and ask Claude to connect and verify your work:</p>
+      <div class="prompt-box">
+        <span class="prompt-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+Connect to my Chrome browser using the chrome-devtools MCP. Take a screenshot of the chat page and verify the emoji picker renders correctly. Check the browser console for any errors.</div>
 
       <div class="callout" style="margin:0.75rem 0;">
         <span class="callout-icon">&#x1f4a1;</span>
-        <div><strong>Prompting lesson:</strong> When describing UI, focus on <em>behavior</em> not implementation. Say "opens a popover above the input with emoji categories" rather than trying to describe the code structure.</div>
+        <div><strong>Prompting lesson:</strong> This is your first taste of "AI-assisted QA" &mdash; Claude sees what users see. In Step 6 you'll create a dedicated QA Tester agent that does this systematically.</div>
       </div>
 
       <details class="hints-toggle">
-        <summary>Hints &amp; key files</summary>
+        <summary>Troubleshooting MCP servers</summary>
         <div class="hints-content">
           <ul>
-            <li><code>ChatPanel</code> is in <code>src/components/chat/chat-panel.tsx</code> &mdash; manages <code>inputValue</code> state</li>
-            <li>The input uses <code>InputGroup</code>, <code>InputGroupAddon</code>, <code>InputGroupInput</code></li>
-            <li>No emoji library needed &mdash; hardcoded emoji strings work fine</li>
-            <li>Use shadcn <code>Popover</code> with <code>side="top"</code> so it opens above the input</li>
+            <li><strong>Server shows as disconnected:</strong> Make sure you restarted Claude Code after creating <code>.mcp.json</code> (exit and run <code>claude</code> again)</li>
+            <li><strong>npx errors:</strong> Ensure Node.js 20+ is installed and <code>npx</code> is available in your PATH</li>
+            <li><strong>Chrome DevTools can't connect:</strong> Open Chrome manually first, then ask Claude to connect. The MCP server needs a running Chrome instance</li>
+            <li><strong>Playwright times out:</strong> The first run may take a moment to download browser binaries. Be patient on the first invocation</li>
+            <li><strong>Important:</strong> Claude Code must be launched from the project root folder (<code>cd /path/to/whatsapp-clone-starter &amp;&amp; claude</code>) for <code>.mcp.json</code> to be picked up</li>
           </ul>
-        </div>
-      </details>
-
-      <details class="hints-toggle">
-        <summary>Prompt</summary>
-        <div class="hints-content">
-          <div class="prompt-box">
-            <span class="prompt-label">Prompt</span>
-            <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
-Add an emoji picker to the chat message input in ChatPanel. Place a smiley face icon button to the left of the text input. Clicking it should open a shadcn Popover (side="top") with categorized emoji tabs (Smileys, People, Animals, Food, Travel, Objects, Symbols). Each category shows a grid of hardcoded emoji strings. Clicking an emoji inserts it into the message input and keeps the popover open. Do not use any third-party emoji picker library — build it with hardcoded emoji strings and shadcn/ui primitives only. Create a new EmojiPicker component in src/components/chat/ and integrate it into ChatPanel.</div>
         </div>
       </details>
 
       <h3>What you should see</h3>
-      <ul class="checklist" data-feature="1">
-        <li onclick="toggleCheck(this)">A smiley face icon button appears to the left of the message input</li>
-        <li onclick="toggleCheck(this)">Clicking it opens a popover above the input with emoji categories</li>
-        <li onclick="toggleCheck(this)">Clicking a category tab switches the displayed emojis</li>
-        <li onclick="toggleCheck(this)">Clicking an emoji inserts it into the message input field</li>
+      <ul class="checklist" data-feature="4">
+        <li onclick="toggleCheck(this)">Running <code>/mcp</code> shows <strong>context7</strong>, <strong>playwright</strong>, and <strong>chrome-devtools</strong> as connected</li>
+        <li onclick="toggleCheck(this)"><code>/permissions</code> shows the current tool permission settings</li>
+        <li onclick="toggleCheck(this)">Claude connected to Chrome and took a screenshot of the app</li>
+        <li onclick="toggleCheck(this)">Claude checked the browser console for errors</li>
       </ul>
 
-      <button class="complete-btn" onclick="markComplete(1, this)">Mark as Complete</button>
+      <button class="complete-btn" onclick="markComplete(4, this)">Mark as Complete</button>
     </div>
   </div>
 
-  <!-- Feature 2 -->
-  <div class="card" id="feature-2" data-feature="2">
+  <!-- ===== STEP 5: Interaction Controls ===== -->
+  <div class="card" id="feature-5" data-feature="5">
     <div class="card-header" onclick="toggleCard(this.parentElement)">
-      <div class="card-number"><span>2</span></div>
+      <div class="card-number"><span>5</span></div>
       <div class="card-info">
-        <div class="card-title">New Chat Popover</div>
-        <div class="card-meta">~10 min &middot; Popover, Contacts Query, Navigation</div>
+        <div class="card-title">Interaction Controls &mdash; Esc, Screenshots, /resume</div>
+        <div class="card-meta">~5 min &middot; Interrupt, abort, visual debugging</div>
       </div>
       <div class="card-chevron">&#x276F;</div>
     </div>
     <div class="card-body">
-      <p>Right now the chat sidebar has a "Chats" header but no way to start a new conversation. Add a button that opens a popover showing your contacts, letting you pick one to start a direct chat.</p>
+      <p>Learn how to steer Claude mid-flight and use visual input for debugging.</p>
 
-      <h3>How to prompt this</h3>
-      <p style="font-size:0.88rem;margin-bottom:0.75rem;">Your prompt should tell Claude <em>where</em> to add the button, <em>what</em> it opens, and <em>which existing code</em> to reuse:</p>
-      <ul style="font-size:0.88rem;padding-left:1.5rem;margin-bottom:0.5rem;">
-        <li>Where the button goes (chat sidebar header, next to the title)</li>
-        <li>What happens on click (popover with contacts list + search)</li>
-        <li>Point Claude to <strong>existing code</strong>: the <code>useCreateDirectChat</code> mutation and <code>contactsQueryOptions</code> &mdash; this avoids Claude reinventing things that already exist</li>
-        <li>What happens when a contact is clicked (create chat + navigate)</li>
+      <h3>Esc (single press)</h3>
+      <p>Interrupts Claude mid-generation. <strong>Partial work is kept</strong> &mdash; any files already written stay on disk. Use when Claude is heading in the wrong direction and you want to course-correct.</p>
+
+      <h3>Esc + Esc (double press)</h3>
+      <p>Aborts and <strong>discards</strong> the current generation entirely. Use when you want to start over with a completely different approach.</p>
+
+      <h3>Screenshots</h3>
+      <p>Drag or paste a screenshot directly into Claude Code. Claude analyzes the UI visually &mdash; spots layout issues, CSS bugs, and compares with expectations. This is powerful for "it looks wrong but I don't know why" situations.</p>
+      <p>Exercise: take a screenshot of the emoji picker and paste it into Claude for feedback.</p>
+
+      <h3>/resume</h3>
+      <p>Resumes the last interrupted session. Useful after accidental terminal close, after a break, or if your laptop went to sleep. Claude picks up where it left off.</p>
+
+      <h3>Practice</h3>
+      <p>Try these interactions:</p>
+      <ol>
+        <li>Ask Claude something, then press <code>Esc</code> to interrupt mid-response</li>
+        <li>Take a screenshot of the current app UI and paste it into Claude</li>
+        <li>Exit Claude Code, relaunch, and use <code>/resume</code> to continue</li>
+      </ol>
+
+      <h3>What you should see</h3>
+      <ul class="checklist" data-feature="5">
+        <li onclick="toggleCheck(this)">Practiced <code>Esc</code> to interrupt Claude mid-generation</li>
+        <li onclick="toggleCheck(this)">Used a screenshot for visual feedback</li>
+        <li onclick="toggleCheck(this)">Understands <code>/resume</code> for session recovery</li>
       </ul>
 
-      <div class="callout" style="margin:0.75rem 0;">
-        <span class="callout-icon">&#x1f4a1;</span>
-        <div><strong>Prompting lesson:</strong> Referencing existing code by name (<code>useCreateDirectChat</code>, <code>contactsQueryOptions</code>) is one of the most effective techniques. It saves Claude from guessing and prevents duplicate code.</div>
+      <button class="complete-btn" onclick="markComplete(5, this)">Mark as Complete</button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 6: Agents, Skills, Hooks & New Chat Popover ===== -->
+  <div class="card" id="feature-6" data-feature="6">
+    <div class="card-header" onclick="toggleCard(this.parentElement)">
+      <div class="card-number"><span>6</span></div>
+      <div class="card-info">
+        <div class="card-title">Agents, Skills &amp; Hooks &mdash; Build New Chat Popover</div>
+        <div class="card-meta">~20 min &middot; /agents, /skills, /hooks, full workflow</div>
       </div>
+      <div class="card-chevron">&#x276F;</div>
+    </div>
+    <div class="card-body">
+      <p>Create specialized agents, reusable skills, and automated hooks &mdash; then put them all to work by building a feature through the full agent workflow.</p>
+
+      <h3>6a. Create 5 Custom Agents (~5 min)</h3>
+      <p>Custom agents are specialized Claude Code personas. Each agent is a <code>.md</code> file in <code>.claude/agents/</code>. You switch between agents with <code>/agents</code>.</p>
+      <p>Describe each agent's role to Claude and let it generate the file:</p>
+      <ol>
+        <li><strong>Code Archaeologist</strong> (<code>.claude/agents/code-archaeologist.md</code>)<br><span style="font-size:0.85rem;color:var(--text-muted);">Read-only explorer. Maps existing code, documents what exists and what's missing. Constrained to read tools only (Read, Grep, Glob). Cannot modify files.</span></li>
+        <li><strong>Software Architect</strong> (<code>.claude/agents/sw-architect.md</code>)<br><span style="font-size:0.85rem;color:var(--text-muted);">Designs integration plans without writing code. Identifies change order, pitfalls, dependencies. Read-only. Produces step-by-step plans.</span></li>
+        <li><strong>Developer</strong> (<code>.claude/agents/developer.md</code>)<br><span style="font-size:0.85rem;color:var(--text-muted);">Implements code changes. Full tool access. Follows project conventions from CLAUDE.md.</span></li>
+        <li><strong>QA Tester</strong> (<code>.claude/agents/qa-tester.md</code>)<br><span style="font-size:0.85rem;color:var(--text-muted);">Drives the browser to verify features. Uses Playwright and Chrome DevTools MCP. Takes screenshots, checks console errors, tests edge cases.</span></li>
+        <li><strong>Business Analyst</strong> (<code>.claude/agents/business-analyst.md</code>)<br><span style="font-size:0.85rem;color:var(--text-muted);">Reviews from the user's perspective. Documents user flows, identifies UX gaps, suggests improvements.</span></li>
+      </ol>
+      <p style="margin-top:0.5rem;">Verify all 5 appear:</p>
+      <div class="prompt-box">
+        <span class="prompt-label">Claude Code</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+/agents</div>
 
       <details class="hints-toggle">
-        <summary>Hints &amp; key files</summary>
+        <summary>Tips for writing agent prompts</summary>
         <div class="hints-content">
           <ul>
-            <li><code>ChatSidebar</code> is in <code>src/components/chat/chat-sidebar.tsx</code> &mdash; this is where the button gets imported</li>
-            <li><code>useCreateDirectChat</code> is in <code>src/queries/chats.ts</code> &mdash; expects <code>{ userId, userName, userImage }</code></li>
-            <li><code>contactsQueryOptions</code> is in <code>src/queries/contacts.ts</code></li>
-            <li>Use shadcn <code>Popover</code> from <code>src/components/ui/popover.tsx</code></li>
+            <li><strong>Role first:</strong> Start with what the agent <em>is</em> ("You are a senior code reviewer") not what it does</li>
+            <li><strong>Constrain tools:</strong> A reviewer should only read, never write. A tester needs Playwright MCP. Mention what tools are allowed or forbidden</li>
+            <li><strong>Define output format:</strong> Tell the reviewer how to report issues (severity, location, recommendation). Tell the tester how to report results (pass/fail with screenshots)</li>
+            <li><strong>Don't repeat CLAUDE.md:</strong> Agents automatically inherit project context. You don't need to list the tech stack again</li>
+            <li><strong>Keep it short:</strong> A few focused paragraphs is plenty</li>
           </ul>
         </div>
       </details>
 
+      <h3>6b. Create Skills &amp; Hooks (~5 min)</h3>
+
+      <p><strong>Skill: <code>/commit</code></strong> (<code>.claude/skills/commit.md</code>)</p>
+      <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:0.5rem;">A skill that stages and commits changes using Conventional Commits format (<code>feat:</code>, <code>fix:</code>, <code>refactor:</code>, <code>docs:</code>). It looks at the current diff, picks the right type and scope, and writes a clear commit message.</p>
+      <p>Ask Claude to create the skill file for you.</p>
+
+      <p style="margin-top:0.75rem;"><strong>Hook: Pre-commit lint</strong></p>
+      <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:0.5rem;">Create a hook that runs <code>pnpm lint</code> before every commit. Hooks trigger on events like <code>PreToolUse</code> (before a tool runs), <code>PostToolUse</code> (after), or <code>Notification</code>.</p>
+      <div class="prompt-box">
+        <span class="prompt-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+Create a pre-commit hook that runs pnpm lint before every commit. Also create a /commit skill in .claude/skills/ that stages changes and commits using Conventional Commits format (feat:, fix:, refactor:, docs:). The skill should look at the diff, pick the right type, and write a clear commit message.</div>
+
+      <h3>6c. Build New Chat Popover &mdash; Full Agent Workflow (~10 min)</h3>
+      <p>Now put every agent, skill, and hook to work on a real feature. Cycle through each agent using <code>/agents</code>:</p>
+      <ol>
+        <li><strong>Code Archaeologist</strong> &rarr; "Explore what already exists for creating chats. Look at <code>src/queries/chats.ts</code>, <code>src/queries/contacts.ts</code>, and <code>src/components/chat/chat-sidebar.tsx</code>. What hooks and mutations are available?"</li>
+        <li><strong>Software Architect</strong> &rarr; "Design a plan for adding a new-chat popover to the sidebar header using the existing <code>contactsQueryOptions</code> and <code>useCreateDirectChat</code>."</li>
+        <li><strong>Developer</strong> &rarr; Build the feature (use the prompt below)</li>
+        <li><strong>QA Tester</strong> &rarr; "Open the app in the browser. Click the + button. Verify the popover shows contacts. Search for a name. Click a contact and verify a new chat is created. Take screenshots."</li>
+        <li><strong>Business Analyst</strong> &rarr; "Review the new chat popover UX. Is the flow intuitive? Any edge cases?"</li>
+        <li>Use <strong><code>/commit</code></strong> to commit &mdash; verify the skill picks the right type and the lint hook runs.</li>
+      </ol>
+
       <details class="hints-toggle">
-        <summary>Prompt</summary>
+        <summary>Prompt (for developer agent)</summary>
         <div class="hints-content">
           <div class="prompt-box">
             <span class="prompt-label">Prompt</span>
@@ -1066,60 +1180,68 @@ Add a "new chat" button to the ChatSidebar header, next to the "Chats" title. Cl
         </div>
       </details>
 
-      <h3>What you should see</h3>
-      <ul class="checklist" data-feature="2">
-        <li onclick="toggleCheck(this)">A "+" button appears in the chat sidebar header</li>
-        <li onclick="toggleCheck(this)">Clicking it opens a popover with a search field and your contacts list</li>
-        <li onclick="toggleCheck(this)">Typing in the search field filters the list</li>
-        <li onclick="toggleCheck(this)">Clicking a contact creates a new chat and navigates to it</li>
-      </ul>
-
-      <button class="complete-btn" onclick="markComplete(2, this)">Mark as Complete</button>
-    </div>
-  </div>
-
-  <!-- Feature 3 -->
-  <div class="card" id="feature-3" data-feature="3">
-    <div class="card-header" onclick="toggleCard(this.parentElement)">
-      <div class="card-number"><span>3</span></div>
-      <div class="card-info">
-        <div class="card-title">Pin &amp; Archive Chats</div>
-        <div class="card-meta">~15 min &middot; Mutations, Optimistic Updates, New Route</div>
-      </div>
-      <div class="card-chevron">&#x276F;</div>
-    </div>
-    <div class="card-body">
-      <p>Chat list items currently have no actions beyond clicking to open them. Add a right-click context menu with Pin, Archive, and Delete options, plus an Archive page.</p>
-
-      <h3>How to prompt this</h3>
-      <p style="font-size:0.88rem;margin-bottom:0.75rem;">This feature spans several files. You can give Claude the whole picture in one prompt or break it into steps. Either way, cover these pieces:</p>
-      <ul style="font-size:0.88rem;padding-left:1.5rem;margin-bottom:0.5rem;">
-        <li><strong>Context menu on chats:</strong> right-click a chat to Pin/Unpin, Archive, or Delete</li>
-        <li><strong>Pinned chats:</strong> pinned chats sort to the top with a pin icon</li>
-        <li><strong>Archive page:</strong> a new route that shows archived chats with an Unarchive button</li>
-        <li><strong>Sidebar nav:</strong> an Archive icon in the app sidebar</li>
-        <li>Ask Claude to use <strong>optimistic updates</strong> so the UI responds instantly</li>
-      </ul>
-
-      <div class="callout" style="margin:0.75rem 0;">
-        <span class="callout-icon">&#x1f4a1;</span>
-        <div><strong>Prompting lesson:</strong> Mentioning a technique by name ("use optimistic updates") is enough &mdash; Claude knows the pattern. You do not need to explain <em>how</em> to implement it.</div>
-      </div>
-
       <details class="hints-toggle">
         <summary>Hints &amp; key files</summary>
         <div class="hints-content">
           <ul>
-            <li>Chat list item: <code>src/components/chat/chat-list-item.tsx</code></li>
-            <li>Chat sidebar: <code>src/components/chat/chat-sidebar.tsx</code></li>
-            <li>App sidebar (nav): <code>src/components/app-sidebar.tsx</code></li>
-            <li>Mutations go in <code>src/queries/chats.ts</code> &mdash; API functions are in <code>src/lib/api/chats.ts</code></li>
-            <li>The <code>Chat</code> type has <code>pinnedAt</code> and <code>archivedAt</code> optional fields</li>
-            <li>For the archive route: <code>createFileRoute("/_app/archive")</code></li>
-            <li>Check the <strong>Swagger docs</strong> for the <code>/chats</code> endpoints to see how pin/archive/delete work and what fields are returned</li>
+            <li><code>ChatSidebar</code> is in <code>src/components/chat/chat-sidebar.tsx</code></li>
+            <li><code>useCreateDirectChat</code> is in <code>src/queries/chats.ts</code> &mdash; expects <code>{ userId, userName, userImage }</code></li>
+            <li><code>contactsQueryOptions</code> is in <code>src/queries/contacts.ts</code></li>
+            <li>Use shadcn <code>Popover</code> from <code>src/components/ui/popover.tsx</code></li>
           </ul>
         </div>
       </details>
+
+      <div class="callout" style="margin:0.75rem 0;">
+        <span class="callout-icon">&#x1f4a1;</span>
+        <div><strong>Prompting lesson:</strong> Referencing existing code by name (<code>useCreateDirectChat</code>, <code>contactsQueryOptions</code>) is one of the most effective techniques. It saves Claude from guessing and prevents duplicate code.</div>
+      </div>
+
+      <h3>What you should see</h3>
+      <ul class="checklist" data-feature="6">
+        <li onclick="toggleCheck(this)">5 agent files exist in <code>.claude/agents/</code> and <code>/agents</code> shows them</li>
+        <li onclick="toggleCheck(this)"><code>/commit</code> skill created and works with Conventional Commits</li>
+        <li onclick="toggleCheck(this)">Pre-commit lint hook runs when committing</li>
+        <li onclick="toggleCheck(this)">A "+" button appears in the chat sidebar header</li>
+        <li onclick="toggleCheck(this)">Popover opens with search field and contacts list</li>
+        <li onclick="toggleCheck(this)">Clicking a contact creates a new chat and navigates to it</li>
+        <li onclick="toggleCheck(this)">QA Tester verified the feature in the browser</li>
+      </ul>
+
+      <button class="complete-btn" onclick="markComplete(6, this)">Mark as Complete</button>
+    </div>
+  </div>
+
+  <!-- ============ HOUR 2 ============ -->
+  <div class="section-label">
+    <span class="hour-badge hour2">Hour 2</span>
+    <h2>Going Live (~60 min)</h2>
+  </div>
+
+  <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1.25rem;">Apply everything from Hour 1 to build complex features and connect to the real live API. Use your agents, plan mode, and MCP tools on harder problems. By the end you will be chatting with other workshop participants in real time.</p>
+
+  <!-- ===== STEP 7: Pin & Archive ===== -->
+  <div class="card" id="feature-7" data-feature="7">
+    <div class="card-header" onclick="toggleCard(this.parentElement)">
+      <div class="card-number"><span>7</span></div>
+      <div class="card-info">
+        <div class="card-title">Pin &amp; Archive Chats</div>
+        <div class="card-meta">~20 min &middot; Plan Mode, Agents, Mutations, New Route</div>
+      </div>
+      <div class="card-chevron">&#x276F;</div>
+    </div>
+    <div class="card-body">
+      <p>Chat list items currently have no actions beyond clicking to open them. Add a right-click context menu with Pin, Archive, and Delete options, plus a full Archive page.</p>
+      <p>Use <strong>plan mode with extended thinking</strong> to design the approach, then your <strong>developer agent</strong> to build it, and <strong>QA tester</strong> to verify.</p>
+
+      <h3>Recommended flow</h3>
+      <ol>
+        <li>Ask Claude to <strong>plan</strong> the feature with extended thinking (<code>ultrathink</code>)</li>
+        <li>Review and approve the plan</li>
+        <li>Switch to <strong>developer</strong> agent to implement</li>
+        <li>Switch to <strong>QA tester</strong> to verify in the browser</li>
+        <li>Use <code>/commit</code> to commit the changes</li>
+      </ol>
 
       <details class="hints-toggle">
         <summary>Prompt</summary>
@@ -1131,8 +1253,28 @@ Add a right-click context menu to chat list items in ChatListItem with Pin/Unpin
         </div>
       </details>
 
+      <details class="hints-toggle">
+        <summary>Hints &amp; key files</summary>
+        <div class="hints-content">
+          <ul>
+            <li>Chat list item: <code>src/components/chat/chat-list-item.tsx</code></li>
+            <li>Chat sidebar: <code>src/components/chat/chat-sidebar.tsx</code></li>
+            <li>App sidebar (nav): <code>src/components/app-sidebar.tsx</code></li>
+            <li>Mutations go in <code>src/queries/chats.ts</code> &mdash; API functions in <code>src/lib/api/chats.ts</code></li>
+            <li>The <code>Chat</code> type has <code>pinnedAt</code> and <code>archivedAt</code> optional fields</li>
+            <li>For the archive route: <code>createFileRoute("/_app/archive")</code></li>
+            <li>Check the <strong>Swagger docs</strong> for the <code>/chats</code> endpoints</li>
+          </ul>
+        </div>
+      </details>
+
+      <div class="callout" style="margin:0.75rem 0;">
+        <span class="callout-icon">&#x1f4a1;</span>
+        <div><strong>Prompting lesson:</strong> Mentioning a technique by name ("use optimistic updates") is enough &mdash; Claude knows the pattern. You don't need to explain <em>how</em> to implement it.</div>
+      </div>
+
       <h3>What you should see</h3>
-      <ul class="checklist" data-feature="3">
+      <ul class="checklist" data-feature="7">
         <li onclick="toggleCheck(this)">Right-clicking a chat shows Archive, Pin/Unpin, and Delete options</li>
         <li onclick="toggleCheck(this)">Pinning a chat moves it to the top with a pin icon</li>
         <li onclick="toggleCheck(this)">Archiving a chat removes it from the main list</li>
@@ -1141,134 +1283,45 @@ Add a right-click context menu to chat list items in ChatListItem with Pin/Unpin
         <li onclick="toggleCheck(this)">Unarchiving returns the chat to the main list</li>
       </ul>
 
-      <button class="complete-btn" onclick="markComplete(3, this)">Mark as Complete</button>
+      <button class="complete-btn" onclick="markComplete(7, this)">Mark as Complete</button>
     </div>
   </div>
 
-  <!-- Bonus: Attachments -->
-  <div class="card bonus" id="feature-bonus-attachments" data-feature="bonus-attachments">
+  <!-- ===== STEP 8: Wire Up WebSocket ===== -->
+  <div class="card" id="feature-8" data-feature="8">
     <div class="card-header" onclick="toggleCard(this.parentElement)">
-      <div class="card-number"><span>&#x2605;</span></div>
+      <div class="card-number"><span>8</span></div>
       <div class="card-info">
-        <div class="card-title">Bonus: Add Attachments</div>
-        <div class="card-meta">~15 min &middot; File Upload, Preview, Message Integration</div>
+        <div class="card-title">Wire Up WebSocket &mdash; Full Agent Rotation</div>
+        <div class="card-meta">~20 min &middot; All 5 Agents, Real-time, API Integration</div>
       </div>
       <div class="card-chevron">&#x276F;</div>
     </div>
     <div class="card-body">
-      <p>Messages are text-only right now. Add the ability to attach files (images, documents) to messages so users can share media in their chats.</p>
+      <p>The project already has a complete WebSocket infrastructure &mdash; a typed client, a state store, and a hook that syncs events into the TanStack Query cache. But the chat page uses <strong>mock data</strong>. Wire it to the real live API using the full agent workflow.</p>
 
-      <h3>How to prompt this</h3>
-      <p style="font-size:0.88rem;margin-bottom:0.75rem;">Describe the attachment flow end to end:</p>
-      <ul style="font-size:0.88rem;padding-left:1.5rem;margin-bottom:0.5rem;">
-        <li>An attachment button (paperclip icon) next to the message input</li>
-        <li>Clicking it opens a file picker (images, documents, etc.)</li>
-        <li>Selected files show a preview above the input before sending</li>
-        <li>Users can remove a selected file before sending</li>
-        <li>When sent, the message includes the attachment &mdash; images display inline, other files show as a download link</li>
-        <li>Point Claude to the <strong>existing upload endpoint</strong> and the <code>Message</code> type's attachment fields</li>
-      </ul>
-
-      <div class="callout" style="margin:0.75rem 0;">
-        <span class="callout-icon">&#x1f4a1;</span>
-        <div><strong>Prompting lesson:</strong> For features that span the input area and the message display, describe both sides: what the <em>sender</em> sees (file picker, preview, remove) and what the <em>receiver</em> sees (inline image or download link).</div>
-      </div>
+      <h3>Agent rotation</h3>
+      <p>Cycle through all 5 agents using <code>/agents</code>:</p>
+      <ol>
+        <li><strong>Code Archaeologist</strong> &rarr; Explore the WebSocket infrastructure</li>
+        <li><strong>Software Architect</strong> &rarr; Design the wiring plan</li>
+        <li><strong>Developer</strong> &rarr; Implement the changes</li>
+        <li><strong>QA Tester</strong> &rarr; Verify in the browser</li>
+        <li><strong>Business Analyst</strong> &rarr; Document the flow and identify UX gaps</li>
+      </ol>
 
       <details class="hints-toggle">
-        <summary>Hints &amp; key files</summary>
-        <div class="hints-content">
-          <ul>
-            <li><code>ChatPanel</code> in <code>src/components/chat/chat-panel.tsx</code> &mdash; add the attachment button and preview area</li>
-            <li><code>MessageBubble</code> in <code>src/components/chat/message-bubble.tsx</code> &mdash; render attachments in messages</li>
-            <li>The upload endpoint is <code>POST /api/upload</code> &mdash; check the <strong>Swagger docs</strong> for the request/response shape</li>
-            <li>The <code>Message</code> type has optional attachment fields (<code>fileUrl</code>, <code>fileName</code>, <code>fileType</code>)</li>
-            <li>Use a hidden <code>&lt;input type="file"&gt;</code> triggered by the paperclip button</li>
-          </ul>
-        </div>
-      </details>
-
-      <details class="hints-toggle">
-        <summary>Prompt</summary>
+        <summary>Prompt for Code Archaeologist</summary>
         <div class="hints-content">
           <div class="prompt-box">
             <span class="prompt-label">Prompt</span>
             <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
-Add file attachment support to the chat. Place a paperclip icon button next to the message input in ChatPanel. Clicking it opens a file picker via a hidden &lt;input type="file"&gt;. Selected files show a preview area above the input — images show a thumbnail, other files show the filename — with a remove button to cancel. When sending, upload the file to POST /api/upload first, then send the message with the attachment fields. In MessageBubble, render image attachments inline and other file types as a download link. The Message type already has fileUrl, fileName, and fileType optional fields. Check the Swagger docs at https://backend-production-12809.up.railway.app/swagger for the upload endpoint request/response shape.</div>
-        </div>
-      </details>
-
-      <h3>What you should see</h3>
-      <ul class="checklist" data-feature="bonus-attachments">
-        <li onclick="toggleCheck(this)">A paperclip icon button appears next to the message input</li>
-        <li onclick="toggleCheck(this)">Clicking it opens the file picker</li>
-        <li onclick="toggleCheck(this)">Selected files show a preview above the input with a remove button</li>
-        <li onclick="toggleCheck(this)">Sending a message with an image shows the image inline in the chat</li>
-        <li onclick="toggleCheck(this)">Sending a non-image file shows a download link in the message</li>
-      </ul>
-
-      <button class="complete-btn" onclick="markComplete('bonus-attachments', this)">Mark as Complete</button>
-    </div>
-  </div>
-
-  <!-- ============ HOUR 2 ============ -->
-  <div class="section-label">
-    <span class="hour-badge hour2">Hour 2</span>
-    <h2>Real-time Layer (~1 hour)</h2>
-  </div>
-
-  <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1.25rem;">Your UI features are built and connected to the REST API. But the chat page still uses mock data and has no real-time updates. The good news: the project already has a complete WebSocket infrastructure &mdash; a typed client, a state store, and a hook that syncs live events into the TanStack Query cache. In this hour you will explore those existing hooks and wire them into the app.</p>
-
-  <!-- Step 4: Explore & Wire Up the Chat Page -->
-  <div class="card" id="feature-4" data-feature="4">
-    <div class="card-header" onclick="toggleCard(this.parentElement)">
-      <div class="card-number"><span>4</span></div>
-      <div class="card-info">
-        <div class="card-title">Explore &amp; Wire Up the Chat Page</div>
-        <div class="card-meta">~20 min &middot; Codebase Exploration, Hook Integration, Real-time Wiring</div>
-      </div>
-      <div class="card-chevron">&#x276F;</div>
-    </div>
-    <div class="card-body">
-      <p>The project already has a complete WebSocket infrastructure ready to use &mdash; a typed client (<code>src/lib/ws-client.ts</code>), a state store (<code>src/stores/ws-store.ts</code>), and a hook that syncs real-time events into the TanStack Query cache (<code>src/hooks/use-websocket.ts</code>). But right now, the chat page uses <strong>mock data</strong> from <code>src/stores/app-store.tsx</code> and none of the real-time hooks are connected. Your job is to wire everything up.</p>
-
-      <h3>How to prompt this</h3>
-      <p style="font-size:0.88rem;margin-bottom:0.75rem;">Start by asking Claude to <strong>explore the existing infrastructure</strong>, then ask it to wire everything together. You need two things to happen:</p>
-      <ul style="font-size:0.88rem;padding-left:1.5rem;margin-bottom:0.5rem;">
-        <li><strong>Mount the WebSocket hook:</strong> <code>useWebSocketConnection()</code> from <code>src/hooks/use-websocket.ts</code> needs to be called in <code>src/routes/_app.tsx</code> so the WebSocket connects for all authenticated routes</li>
-        <li><strong>Replace mock data with real queries:</strong> The chat page at <code>src/routes/_app/chats/$chatId.tsx</code> currently imports from <code>app-store</code> (mock data). It needs to switch to real TanStack Query hooks using the query options from <code>src/queries/chats.ts</code> and the WebSocket hooks from <code>src/hooks/use-websocket.ts</code></li>
-      </ul>
-      <p style="font-size:0.88rem;margin-bottom:0.5rem;">The chat page should use these hooks:</p>
-      <ul style="font-size:0.88rem;padding-left:1.5rem;margin-bottom:0.5rem;">
-        <li><code>useSuspenseQuery(chatsQueryOptions)</code> &mdash; get the chat list to find the current chat</li>
-        <li><code>useSuspenseInfiniteQuery(messagesQueryOptions(chatId))</code> &mdash; paginated messages with cursor-based loading</li>
-        <li><code>useTypingIndicator(chatId)</code> &mdash; send typing events when the user types</li>
-        <li><code>useTypingUsers(chatId)</code> &mdash; show who is typing in this chat</li>
-        <li><code>useCurrentUserId()</code> &mdash; identify the current user for message alignment</li>
-        <li>Message sending via the API function <code>sendMessage()</code> from <code>src/lib/api/chats.ts</code> with <strong>optimistic updates</strong> to the query cache</li>
-      </ul>
-
-      <div class="callout" style="margin:0.75rem 0;">
-        <span class="callout-icon">&#x1f4a1;</span>
-        <div><strong>Prompting lesson:</strong> When wiring up existing code, the most effective prompt tells Claude to <em>read specific files first</em> before making changes. Say "read <code>src/hooks/use-websocket.ts</code> and <code>src/queries/chats.ts</code>, then update the chat page to use them." This prevents Claude from reinventing things that already exist.</div>
-      </div>
-
-      <details class="hints-toggle">
-        <summary>Hints &amp; key files</summary>
-        <div class="hints-content">
-          <ul>
-            <li><strong>Existing WebSocket hook:</strong> <code>src/hooks/use-websocket.ts</code> exports <code>useWebSocketConnection</code> (mount once in <code>_app.tsx</code>) and <code>useTypingIndicator(chatId)</code></li>
-            <li><strong>Existing store:</strong> <code>src/stores/ws-store.ts</code> exports <code>useTypingUsers(chatId)</code>, <code>useIsUserOnline(userId)</code>, <code>useConnectionStatus()</code></li>
-            <li><strong>Query options:</strong> <code>src/queries/chats.ts</code> has <code>chatsQueryOptions</code>, <code>messagesQueryOptions(chatId)</code>, <code>chatDetailsQueryOptions(chatId)</code></li>
-            <li><strong>API functions:</strong> <code>src/lib/api/chats.ts</code> has <code>sendMessage(chatId, data)</code>, <code>fetchChats()</code>, <code>fetchMessages(chatId, cursor)</code></li>
-            <li><strong>Mock data to replace:</strong> <code>src/stores/app-store.tsx</code> &mdash; the chat page currently imports <code>useChats()</code>, <code>useMessages()</code>, <code>sendMessage()</code> from here</li>
-            <li>Messages use <code>infiniteQueryOptions</code> with cursor-based pagination &mdash; the first page is the most recent</li>
-            <li>For optimistic message sending: create a temp message with <code>temp-{timestamp}</code> ID, add it to the cache, then replace with the real one on API success</li>
-          </ul>
+Explore the WebSocket infrastructure in this project. Read src/hooks/use-websocket.ts, src/stores/ws-store.ts, src/queries/chats.ts, src/lib/api/chats.ts, and src/routes/_app/chats/$chatId.tsx. Tell me what exists, what's connected, and what's still using mock data from app-store.</div>
         </div>
       </details>
 
       <details class="hints-toggle">
-        <summary>Prompt</summary>
+        <summary>Prompt for Developer</summary>
         <div class="hints-content">
           <div class="prompt-box">
             <span class="prompt-label">Prompt</span>
@@ -1296,69 +1349,72 @@ Then make these changes:
         </div>
       </details>
 
-      <h3>What you should see</h3>
-      <ul class="checklist" data-feature="4">
-        <li onclick="toggleCheck(this)">WebSocket connects automatically when you sign in (check Network tab for WS connection)</li>
-        <li onclick="toggleCheck(this)">The chat page loads real messages from the API instead of mock data</li>
-        <li onclick="toggleCheck(this)">Sending a message appears instantly (optimistic update) and persists after refresh</li>
-        <li onclick="toggleCheck(this)">Typing in the input sends typing events (other users see "typing..." indicator)</li>
-        <li onclick="toggleCheck(this)">New messages from other users appear in real time without refreshing</li>
-      </ul>
-
-      <button class="complete-btn" onclick="markComplete(4, this)">Mark as Complete</button>
-    </div>
-  </div>
-
-  <!-- Step 5: Go Live -->
-  <div class="card" id="feature-5" data-feature="5">
-    <div class="card-header" onclick="toggleCard(this.parentElement)">
-      <div class="card-number"><span>5</span></div>
-      <div class="card-info">
-        <div class="card-title">Go Live &mdash; Chat with Participants</div>
-        <div class="card-meta">~40 min &middot; Social, Group Chat, Real-time Testing, Debugging</div>
-      </div>
-      <div class="card-chevron">&#x276F;</div>
-    </div>
-    <div class="card-body">
-      <p>Everything is wired up. Time to test the full real-time experience with other workshop participants. Use this session to chat, find bugs, and iterate with Claude to fix them.</p>
-
-      <h3>How to do this</h3>
-      <ol style="font-size:0.88rem;padding-left:1.5rem;margin-bottom:0.5rem;">
-        <li>Start a <strong>direct chat</strong> using the "+" button in the chat sidebar &mdash; pick a colleague from your contacts list</li>
-        <li>Send messages back and forth &mdash; they should appear <strong>instantly</strong> on both sides</li>
-        <li>The instructor has added everyone to a <strong>hackathon group chat</strong> &mdash; open it and send a message</li>
-        <li>Test <strong>typing indicators</strong> &mdash; type in the input and check if others see the indicator</li>
-        <li>Test <strong>online/offline status</strong> &mdash; check if you can see who is online</li>
-        <li>Try your Hour 1 features in a real conversation: emoji picker, new chat popover, pin/archive</li>
-        <li>If something breaks, describe the symptom to Claude and iterate until it works</li>
-      </ol>
-
-      <div class="callout" style="margin:0.75rem 0;">
-        <span class="callout-icon">&#x1f4a1;</span>
-        <div><strong>Prompting lesson:</strong> If something does not work, describe the symptom to Claude: "I send a message but it does not appear on the other person's screen" or "typing indicators are not showing." This is a good time to use the <strong>QA Tester</strong> agent to drive the browser and verify features.</div>
-      </div>
-
       <details class="hints-toggle">
-        <summary>Hints &amp; key files (if things go wrong)</summary>
+        <summary>Hints &amp; key files</summary>
         <div class="hints-content">
           <ul>
-            <li>If messages don't appear in real time: check that <code>useWebSocketConnection</code> is mounted in <code>_app.tsx</code> and the <code>message</code> handler updates the query cache</li>
-            <li>If the group chat doesn't show up: the <code>added_to_chat</code> handler should invalidate the chat list query</li>
-            <li>If typing indicators don't work: verify <code>useTypingIndicator</code> sends events and the store updates</li>
-            <li>Check the browser console for WebSocket errors or failed event parsing</li>
-            <li>If optimistic updates cause duplicates: ensure the temp message ID is replaced when the real one arrives via WebSocket</li>
+            <li><strong>WebSocket hook:</strong> <code>src/hooks/use-websocket.ts</code> exports <code>useWebSocketConnection</code> and <code>useTypingIndicator(chatId)</code></li>
+            <li><strong>Store:</strong> <code>src/stores/ws-store.ts</code> exports <code>useTypingUsers(chatId)</code>, <code>useIsUserOnline(userId)</code>, <code>useConnectionStatus()</code></li>
+            <li><strong>Query options:</strong> <code>src/queries/chats.ts</code> has <code>chatsQueryOptions</code>, <code>messagesQueryOptions(chatId)</code></li>
+            <li><strong>API:</strong> <code>src/lib/api/chats.ts</code> has <code>sendMessage(chatId, data)</code></li>
+            <li><strong>Mock data:</strong> <code>src/stores/app-store.tsx</code> &mdash; this is what needs to be replaced</li>
+            <li>Messages use <code>infiniteQueryOptions</code> with cursor-based pagination</li>
+            <li>For optimistic sending: create a temp message with <code>temp-{timestamp}</code> ID</li>
           </ul>
         </div>
       </details>
 
+      <div class="callout" style="margin:0.75rem 0;">
+        <span class="callout-icon">&#x1f4a1;</span>
+        <div><strong>Prompting lesson:</strong> When wiring up existing code, the most effective prompt tells Claude to <em>read specific files first</em> before making changes. "Read X and Y, then update Z to use them." This prevents Claude from reinventing infrastructure that already exists.</div>
+      </div>
+
+      <h3>What you should see</h3>
+      <ul class="checklist" data-feature="8">
+        <li onclick="toggleCheck(this)">WebSocket connects automatically when you sign in (check Network tab)</li>
+        <li onclick="toggleCheck(this)">The chat page loads real messages from the API instead of mock data</li>
+        <li onclick="toggleCheck(this)">Sending a message appears instantly (optimistic update) and persists after refresh</li>
+        <li onclick="toggleCheck(this)">Typing in the input sends typing events (other users see "typing...")</li>
+        <li onclick="toggleCheck(this)">New messages from other users appear in real time without refreshing</li>
+      </ul>
+
+      <button class="complete-btn" onclick="markComplete(8, this)">Mark as Complete</button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 9: Go Live ===== -->
+  <div class="card" id="feature-9" data-feature="9">
+    <div class="card-header" onclick="toggleCard(this.parentElement)">
+      <div class="card-number"><span>9</span></div>
+      <div class="card-info">
+        <div class="card-title">Go Live &mdash; Chat with Participants</div>
+        <div class="card-meta">~15 min &middot; Real-time Testing, Debugging, Social</div>
+      </div>
+      <div class="card-chevron">&#x276F;</div>
+    </div>
+    <div class="card-body">
+      <p>Everything is wired up. Time to test the full real-time experience with other workshop participants.</p>
+
+      <h3>How to do this</h3>
+      <ol>
+        <li>Start a <strong>direct chat</strong> using the "+" button &mdash; pick a colleague from your contacts list</li>
+        <li>Send messages back and forth &mdash; they should appear <strong>instantly</strong> on both sides</li>
+        <li>The instructor has added everyone to a <strong>hackathon group chat</strong> &mdash; open it and send a message</li>
+        <li>Test <strong>typing indicators</strong> &mdash; type in the input and check if others see the indicator</li>
+        <li>Test <strong>online/offline status</strong> &mdash; check if you can see who is online</li>
+        <li>Try your Hour 1 features in a real conversation: emoji picker, new chat popover</li>
+        <li>Try your Hour 2 features: pin a chat, archive a chat</li>
+        <li>If something breaks, describe the symptom to Claude and use the <strong>QA Tester</strong> agent to debug</li>
+      </ol>
+
       <details class="hints-toggle">
-        <summary>Prompt (for debugging)</summary>
+        <summary>Debugging prompt</summary>
         <div class="hints-content">
           <div class="prompt-box">
             <span class="prompt-label">Prompt</span>
             <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
-Help me debug real-time messaging. Open the app and verify:
-1. The WebSocket connects automatically on sign-in (check the console/Network tab for the WS connection)
+Help me debug real-time messaging. Verify:
+1. The WebSocket connects automatically on sign-in (check the console/Network tab)
 2. Start a direct chat with a contact and send a message — does it appear on the other side instantly?
 3. Open the hackathon group chat and send a message — do other participants see it in real time?
 4. Check if typing indicators appear when someone is typing
@@ -1368,8 +1424,26 @@ If something doesn't work, check the browser console for WebSocket errors and te
         </div>
       </details>
 
+      <details class="hints-toggle">
+        <summary>Hints (if things go wrong)</summary>
+        <div class="hints-content">
+          <ul>
+            <li>If messages don't appear in real time: check that <code>useWebSocketConnection</code> is mounted in <code>_app.tsx</code></li>
+            <li>If the group chat doesn't show up: the <code>added_to_chat</code> handler should invalidate the chat list query</li>
+            <li>If typing indicators don't work: verify <code>useTypingIndicator</code> sends events</li>
+            <li>If optimistic updates cause duplicates: ensure the temp message ID is replaced when the real one arrives via WebSocket</li>
+            <li>Check the browser console for WebSocket errors or failed event parsing</li>
+          </ul>
+        </div>
+      </details>
+
+      <div class="callout" style="margin:0.75rem 0;">
+        <span class="callout-icon">&#x1f4a1;</span>
+        <div><strong>Prompting lesson:</strong> When debugging, describe <em>symptoms</em> to Claude: "I send a message but it doesn't appear on the other person's screen." This is a good time to use the QA Tester agent to drive the browser and check console errors.</div>
+      </div>
+
       <h3>What you should see</h3>
-      <ul class="checklist" data-feature="5">
+      <ul class="checklist" data-feature="9">
         <li onclick="toggleCheck(this)">Messages appear instantly on both sides of a direct chat</li>
         <li onclick="toggleCheck(this)">The hackathon group chat shows messages from all participants</li>
         <li onclick="toggleCheck(this)">Typing indicators show when someone is typing</li>
@@ -1377,7 +1451,7 @@ If something doesn't work, check the browser console for WebSocket errors and te
         <li onclick="toggleCheck(this)">All Hour 1 features work in a real conversation</li>
       </ul>
 
-      <button class="complete-btn" onclick="markComplete(5, this)">Mark as Complete</button>
+      <button class="complete-btn" onclick="markComplete(9, this)">Mark as Complete</button>
     </div>
   </div>
 
@@ -1390,16 +1464,16 @@ If something doesn't work, check the browser console for WebSocket errors and te
 
   <div class="bonus-grid">
     <div class="bonus-item">
-      <strong>Typing indicators</strong>
-      Send and display typing events over WebSocket with a bouncing dots animation.
-    </div>
-    <div class="bonus-item">
       <strong>Message reactions</strong>
       Add emoji reaction buttons on hover with real-time sync via WebSocket.
     </div>
     <div class="bonus-item">
-      <strong>Got a cool idea?</strong>
-      Think of a feature you wish the app had and try implementing it with Claude. Describe the behavior you want and see how far you get.
+      <strong>File attachments</strong>
+      Paperclip button, file upload via <code>POST /api/upload</code>, preview before sending, inline images in messages.
+    </div>
+    <div class="bonus-item">
+      <strong>Build your own feature</strong>
+      Check the full API reference at <code>https://backend-production-12809.up.railway.app/swagger</code> &mdash; there are endpoints for group chat management, read receipts, message editing, and more. Pick one and implement a feature around it. Describe the behavior you want to Claude and see how far you get.
     </div>
   </div>
 
@@ -1432,25 +1506,47 @@ If something doesn't work, check the browser console for WebSocket errors and te
   </div>
 
   <div class="info-card">
-    <h3>General Workflow</h3>
-    <ol>
-      <li>Read the feature description, guidance, and hints.</li>
-      <li>Write your own prompt describing what you want. Use the "How to prompt this" section for guidance on what to include.</li>
-      <li>Review what Claude generates &mdash; it will show you the files it wants to create or modify.</li>
-      <li>Accept the changes and check the browser.</li>
-      <li>If something is off, describe the problem to Claude and ask it to fix it. Iteration is normal and expected.</li>
-      <li>Move on to the next feature.</li>
-    </ol>
+    <h3>Claude Code Command Cheat Sheet</h3>
+    <table class="cheat-table">
+      <thead><tr><th>Command</th><th>What it does</th><th>Taught in</th></tr></thead>
+      <tbody>
+        <tr><td><code>/init</code></td><td>Generate CLAUDE.md from codebase</td><td>H1 Step 1</td></tr>
+        <tr><td><code>/model</code></td><td>Switch between Opus / Sonnet / Haiku</td><td>H1 Step 1</td></tr>
+        <tr><td><code>/memory</code></td><td>View / edit persistent memories</td><td>H1 Step 1</td></tr>
+        <tr><td>Plan mode</td><td>Design approach before coding</td><td>H1 Step 2</td></tr>
+        <tr><td><code>think</code> / <code>ultrathink</code></td><td>Enable extended thinking</td><td>H1 Step 2</td></tr>
+        <tr><td><code>/context</code></td><td>Add files / URLs to context</td><td>H1 Step 3</td></tr>
+        <tr><td><code>/compact</code></td><td>Compress conversation context</td><td>H1 Step 3</td></tr>
+        <tr><td><code>/clear</code></td><td>Reset conversation entirely</td><td>H1 Step 3</td></tr>
+        <tr><td>Bash mode</td><td>Run shell commands</td><td>H1 Step 3</td></tr>
+        <tr><td><code>@file</code></td><td>Mention files inline in prompts</td><td>H1 Step 3</td></tr>
+        <tr><td><code>/mcp</code></td><td>Check MCP server status</td><td>H1 Step 4</td></tr>
+        <tr><td><code>/permissions</code></td><td>View / manage tool permissions</td><td>H1 Step 4</td></tr>
+        <tr><td><code>/install-github-app</code></td><td>Install Claude GitHub App for PR reviews</td><td>H1 Step 4</td></tr>
+        <tr><td>chrome-devtools MCP</td><td>Inspect browser, console, network</td><td>H1 Step 4</td></tr>
+        <tr><td><code>Esc</code></td><td>Interrupt generation (keep partial work)</td><td>H1 Step 5</td></tr>
+        <tr><td><code>Esc + Esc</code></td><td>Abort generation (discard)</td><td>H1 Step 5</td></tr>
+        <tr><td>Screenshots</td><td>Paste / drag for visual debugging</td><td>H1 Step 5</td></tr>
+        <tr><td><code>/resume</code></td><td>Resume interrupted session</td><td>H1 Step 5</td></tr>
+        <tr><td><code>/agents</code></td><td>Switch between custom agents</td><td>H1 Step 6</td></tr>
+        <tr><td><code>/skills</code></td><td>List available custom skills</td><td>H1 Step 6</td></tr>
+        <tr><td><code>/hooks</code></td><td>View / manage hooks</td><td>H1 Step 6</td></tr>
+        <tr><td><code>/commit</code></td><td>Custom commit skill (Conventional Commits)</td><td>H1 Step 6</td></tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="info-card">
-    <h3>Useful Claude Code Commands</h3>
-    <ul>
-      <li><code>/clear</code> &mdash; Clear conversation history (useful if context gets too long).</li>
-      <li>Type your prompt naturally &mdash; Claude reads the codebase via <code>CLAUDE.md</code>.</li>
-      <li>If Claude asks which file to edit, give it the exact path.</li>
-      <li>You can ask Claude to "read <code>src/components/chat/chat-panel.tsx</code> and tell me what props it accepts".</li>
-    </ul>
+    <h3>General Workflow</h3>
+    <ol>
+      <li>Read the feature description, guidance, and hints.</li>
+      <li>Write your own prompt describing what you want. Use the "How to prompt this" sections for guidance.</li>
+      <li>Review what Claude generates &mdash; it will show you the files it wants to create or modify.</li>
+      <li>Accept the changes and check the browser.</li>
+      <li>If something is off, describe the problem to Claude and ask it to fix it. Iteration is normal.</li>
+      <li>Use <code>/commit</code> to save your progress.</li>
+      <li>Move on to the next feature.</li>
+    </ol>
   </div>
 
   <!-- ============ REFERENCE ============ -->
@@ -1458,7 +1554,6 @@ If something doesn't work, check the browser console for WebSocket errors and te
     <h2>Reference</h2>
   </div>
 
-  <!-- API Reference -->
   <div class="info-card">
     <h3>API Reference (Swagger)</h3>
     <p style="font-size:0.9rem;margin-bottom:0.75rem;">The backend exposes a full OpenAPI spec with Swagger UI. Use it to explore all available endpoints, request/response shapes, and try out API calls directly:</p>
@@ -1466,10 +1561,9 @@ If something doesn't work, check the browser console for WebSocket errors and te
     <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Tip: You can reference the Swagger docs when prompting Claude &mdash; e.g. "look at the <code>/chats</code> endpoint in the API to see what fields are available."</p>
   </div>
 
-  <!-- WebSocket Events Reference -->
   <div class="info-card">
     <h3>WebSocket Events</h3>
-    <p style="font-size:0.9rem;margin-bottom:0.75rem;">All WebSocket messages follow the format <code>{ type, payload }</code>. Here are the events your app can send and receive:</p>
+    <p style="font-size:0.9rem;margin-bottom:0.75rem;">All WebSocket messages follow the format <code>{ type, payload }</code>:</p>
 
     <h4 style="font-size:0.85rem;font-weight:600;margin:0.75rem 0 0.5rem;color:var(--text-muted);">Client &rarr; Server (you send these)</h4>
     <table style="width:100%;font-size:0.82rem;border-collapse:collapse;margin-bottom:1rem;">
@@ -1515,7 +1609,7 @@ If something doesn't work, check the browser console for WebSocket errors and te
 <!-- Scroll to top button -->
 <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">&uarr;</button>
 
-<!-- Tips dialog -->
+<!-- Cheat sheet dialog -->
 <dialog id="tipsDialog">
   <div class="dialog-header">
     <h3>Quick Reference</h3>
@@ -1536,12 +1630,15 @@ If something doesn't work, check the browser console for WebSocket errors and te
     <p>Always use <code>@hugeicons/core-free-icons</code> + <code>@hugeicons/react</code>. If Claude uses lucide icons, ask it to replace them.</p>
     <h4>shadcn Components</h4>
     <p>All UI primitives live in <code>src/components/ui/</code>. You can add new ones with <code>pnpm dlx shadcn@latest add &lt;name&gt;</code>.</p>
+    <h4>All Claude Code Commands</h4>
+    <p><code>/init</code> &middot; <code>/model</code> &middot; <code>/memory</code> &middot; <code>/context</code> &middot; <code>/compact</code> &middot; <code>/clear</code> &middot; <code>/mcp</code> &middot; <code>/permissions</code> &middot; <code>/install-github-app</code> &middot; <code>/resume</code> &middot; <code>/agents</code> &middot; <code>/skills</code> &middot; <code>/hooks</code> &middot; <code>Esc</code> &middot; <code>Esc+Esc</code> &middot; <code>@file</code> &middot; Screenshots &middot; Plan mode &middot; <code>think</code>/<code>ultrathink</code></p>
   </div>
 </dialog>
 
 <script>
   // --- State Management ---
-  const STORAGE_KEY = 'claude-code-labs-progress'
+  const STORAGE_KEY = 'claude-code-labs-progress-v2'
+  const TOTAL_STEPS = 9
 
   function loadProgress() {
     try {
@@ -1566,7 +1663,6 @@ If something doesn't work, check the browser console for WebSocket errors and te
   // --- Copy Prompt ---
   function copyPrompt(btn) {
     const box = btn.closest('.prompt-box')
-    // Get text content excluding the label and button
     const clone = box.cloneNode(true)
     clone.querySelectorAll('.prompt-label, .copy-btn').forEach(el => el.remove())
     const text = clone.textContent.trim()
@@ -1618,7 +1714,6 @@ If something doesn't work, check the browser console for WebSocket errors and te
     const card = document.getElementById(`feature-${featureNum}`)
 
     if (wasCompleted) {
-      // Uncomplete
       delete state[`completed-${featureNum}`]
       saveProgress(state)
 
@@ -1626,11 +1721,9 @@ If something doesn't work, check the browser console for WebSocket errors and te
       btn.textContent = 'Mark as Complete'
       btn.classList.remove('is-completed')
 
-      // Uncheck all checkboxes
       card.querySelectorAll('.checklist li').forEach(li => li.classList.remove('checked'))
       saveChecklistState()
     } else {
-      // Complete
       state[`completed-${featureNum}`] = true
       saveProgress(state)
 
@@ -1638,7 +1731,6 @@ If something doesn't work, check the browser console for WebSocket errors and te
       btn.textContent = 'Completed'
       btn.classList.add('is-completed')
 
-      // Check all checkboxes
       card.querySelectorAll('.checklist li').forEach(li => li.classList.add('checked'))
       saveChecklistState()
     }
@@ -1648,7 +1740,7 @@ If something doesn't work, check the browser console for WebSocket errors and te
 
   function restoreCompleted() {
     const state = loadProgress()
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= TOTAL_STEPS; i++) {
       if (state[`completed-${i}`]) {
         const card = document.getElementById(`feature-${i}`)
         if (card) {
@@ -1667,12 +1759,12 @@ If something doesn't work, check the browser console for WebSocket errors and te
   function updateProgress() {
     const state = loadProgress()
     let completed = 0
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= TOTAL_STEPS; i++) {
       if (state[`completed-${i}`]) completed++
     }
-    const pct = Math.round((completed / 5) * 100)
+    const pct = Math.round((completed / TOTAL_STEPS) * 100)
     document.getElementById('progressFill').style.width = `${pct}%`
-    document.getElementById('progressText').textContent = `${completed} / 5`
+    document.getElementById('progressText').textContent = `${completed} / ${TOTAL_STEPS}`
   }
 
   // --- Reset ---
