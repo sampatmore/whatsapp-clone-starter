@@ -41,7 +41,7 @@ export function ChatPanel({ chat, messages, currentUserId, onSendMessage, onInpu
 
   if (!chat) {
     return (
-      <div className="flex h-full min-w-0 flex-1 items-center justify-center overflow-hidden bg-muted/30">
+      <div className="flex h-full min-w-0 flex-1 items-center justify-center overflow-hidden bg-muted">
         <div className="text-center">
           <p className="text-lg text-muted-foreground">
             Select a chat to start messaging
@@ -79,7 +79,7 @@ export function ChatPanel({ chat, messages, currentUserId, onSendMessage, onInpu
       </div>
 
       {/* Messages */}
-      <ScrollArea className="flex-1 min-h-0 overflow-hidden bg-muted/30 [&>div>div]:!block">
+      <ScrollArea className="flex-1 min-h-0 overflow-hidden bg-muted [&>div>div]:!block">
         <div className="flex flex-col gap-2 p-4">
           {messages.map((message) => (
             <MessageBubble

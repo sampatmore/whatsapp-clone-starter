@@ -6,74 +6,74 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-    /* Anthropic palette - Light mode */
-    --background: oklch(0.98 0.005 90);              /* Warm cream #faf9f5 */
-    --foreground: oklch(0.16 0.005 90);              /* Warm near-black #141413 */
-    --card: oklch(0.99 0.003 90);                    /* Warm white */
-    --card-foreground: oklch(0.16 0.005 90);
-    --popover: oklch(0.99 0.003 90);
-    --popover-foreground: oklch(0.16 0.005 90);
-    --primary: oklch(0.64 0.14 45);                  /* Terra cotta #d97757 */
+    /* WhatsApp palette - Light mode */
+    --background: oklch(0.95 0.005 250);              /* Panel gray #f0f2f5 */
+    --foreground: oklch(0.18 0.015 230);              /* Dark text #111b21 */
+    --card: oklch(1 0 0);                             /* White #ffffff */
+    --card-foreground: oklch(0.18 0.015 230);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.18 0.015 230);
+    --primary: oklch(0.64 0.13 170);                  /* WhatsApp teal #00a884 */
     --primary-foreground: oklch(1 0 0);
-    --secondary: oklch(0.92 0.008 90);               /* Warm light gray #e8e6dc */
-    --secondary-foreground: oklch(0.16 0.005 90);
-    --muted: oklch(0.92 0.008 90);
-    --muted-foreground: oklch(0.74 0.01 90);         /* Warm mid-gray #b0aea5 */
-    --accent: oklch(0.92 0.008 90);
-    --accent-foreground: oklch(0.16 0.005 90);
+    --secondary: oklch(0.96 0.04 145);                /* Sent message green #d9fdd3 */
+    --secondary-foreground: oklch(0.18 0.015 230);
+    --muted: oklch(0.93 0.01 85);                     /* Chat wallpaper beige #efeae2 */
+    --muted-foreground: oklch(0.53 0.02 230);         /* Secondary text #667781 */
+    --accent: oklch(0.94 0.005 250);                  /* Hover gray #e9edef */
+    --accent-foreground: oklch(0.18 0.015 230);
     --destructive: oklch(0.55 0.22 25);
-    --border: oklch(0.90 0.008 90);                  /* Warm gray border */
-    --input: oklch(0.90 0.008 90);                   /* Warm gray input */
-    --ring: oklch(0.64 0.14 45);                     /* Terra cotta for focus */
-    --chart-1: oklch(0.64 0.14 45);                  /* Terra cotta */
-    --chart-2: oklch(0.65 0.09 240);                 /* Muted blue #6a9bcc */
-    --chart-3: oklch(0.58 0.08 130);                 /* Sage green #788c5d */
-    --chart-4: oklch(0.55 0.14 40);                  /* Darker terra cotta */
-    --chart-5: oklch(0.70 0.08 240);                 /* Light blue */
+    --border: oklch(0.92 0.005 230);                  /* Light border #e9edef */
+    --input: oklch(0.92 0.005 230);
+    --ring: oklch(0.64 0.13 170);                     /* Teal focus ring */
+    --chart-1: oklch(0.64 0.13 170);                  /* Teal */
+    --chart-2: oklch(0.55 0.02 230);                  /* Blue-gray */
+    --chart-3: oklch(0.76 0.17 155);                  /* WhatsApp green #25d366 */
+    --chart-4: oklch(0.52 0.10 175);                  /* Dark teal #008069 */
+    --chart-5: oklch(0.70 0.08 240);                  /* Light blue */
     --radius: 0.75rem;
-    --sidebar: oklch(0.96 0.005 90);                 /* Warm light cream */
-    --sidebar-foreground: oklch(0.16 0.005 90);
-    --sidebar-primary: oklch(0.64 0.14 45);
+    --sidebar: oklch(1 0 0);                          /* White sidebar */
+    --sidebar-foreground: oklch(0.18 0.015 230);
+    --sidebar-primary: oklch(0.64 0.13 170);
     --sidebar-primary-foreground: oklch(1 0 0);
-    --sidebar-accent: oklch(0.94 0.006 90);
-    --sidebar-accent-foreground: oklch(0.16 0.005 90);
-    --sidebar-border: oklch(0.90 0.008 90);
-    --sidebar-ring: oklch(0.64 0.14 45);
+    --sidebar-accent: oklch(0.94 0.005 250);
+    --sidebar-accent-foreground: oklch(0.18 0.015 230);
+    --sidebar-border: oklch(0.92 0.005 230);
+    --sidebar-ring: oklch(0.64 0.13 170);
 }
 
 .dark {
-    /* Anthropic palette - Dark mode */
-    --background: oklch(0.20 0.005 90);              /* Warm dark #141413 */
-    --foreground: oklch(0.93 0.005 90);              /* Warm cream text */
-    --card: oklch(0.25 0.005 90);                    /* Warm dark surface */
-    --card-foreground: oklch(0.93 0.005 90);
-    --popover: oklch(0.25 0.005 90);
-    --popover-foreground: oklch(0.93 0.005 90);
-    --primary: oklch(0.68 0.14 45);                  /* Terra cotta (brighter for dark) */
+    /* WhatsApp palette - Dark mode */
+    --background: oklch(0.15 0.015 230);              /* Deep dark #0b141a */
+    --foreground: oklch(0.94 0.005 230);              /* Light text #e9edef */
+    --card: oklch(0.18 0.015 230);                    /* Dark surface #111b21 */
+    --card-foreground: oklch(0.94 0.005 230);
+    --popover: oklch(0.18 0.015 230);
+    --popover-foreground: oklch(0.94 0.005 230);
+    --primary: oklch(0.64 0.13 170);                  /* WhatsApp teal #00a884 */
     --primary-foreground: oklch(1 0 0);
-    --secondary: oklch(0.28 0.005 90);
-    --secondary-foreground: oklch(0.93 0.005 90);
-    --muted: oklch(0.28 0.005 90);
-    --muted-foreground: oklch(0.58 0.01 90);         /* Warm mid-gray */
-    --accent: oklch(0.30 0.005 90);
-    --accent-foreground: oklch(0.93 0.005 90);
+    --secondary: oklch(0.40 0.08 170);                /* Sent message dark green #005c4b */
+    --secondary-foreground: oklch(0.94 0.005 230);
+    --muted: oklch(0.25 0.015 230);                   /* Dark muted #202c33 */
+    --muted-foreground: oklch(0.63 0.02 230);         /* Gray text #8696a0 */
+    --accent: oklch(0.25 0.015 230);                  /* Hover dark #202c33 */
+    --accent-foreground: oklch(0.94 0.005 230);
     --destructive: oklch(0.65 0.18 25);
-    --border: oklch(0.98 0.005 90 / 10%);            /* Warm-tinted border */
-    --input: oklch(0.98 0.005 90 / 12%);
-    --ring: oklch(0.68 0.14 45);                     /* Terra cotta */
-    --chart-1: oklch(0.68 0.14 45);                  /* Terra cotta */
-    --chart-2: oklch(0.68 0.09 240);                 /* Muted blue */
-    --chart-3: oklch(0.62 0.08 130);                 /* Sage green */
-    --chart-4: oklch(0.58 0.14 40);                  /* Darker terra cotta */
-    --chart-5: oklch(0.72 0.08 240);                 /* Light blue */
-    --sidebar: oklch(0.17 0.005 90);                 /* Warm darkest */
-    --sidebar-foreground: oklch(0.93 0.005 90);
-    --sidebar-primary: oklch(0.68 0.14 45);
+    --border: oklch(0.31 0.015 230);                  /* Dark border #2a3942 */
+    --input: oklch(0.31 0.015 230);
+    --ring: oklch(0.64 0.13 170);                     /* Teal focus ring */
+    --chart-1: oklch(0.64 0.13 170);                  /* Teal */
+    --chart-2: oklch(0.60 0.02 230);                  /* Blue-gray */
+    --chart-3: oklch(0.76 0.17 155);                  /* WhatsApp green */
+    --chart-4: oklch(0.52 0.10 175);                  /* Dark teal */
+    --chart-5: oklch(0.72 0.08 240);                  /* Light blue */
+    --sidebar: oklch(0.15 0.015 230);                 /* Deep dark */
+    --sidebar-foreground: oklch(0.94 0.005 230);
+    --sidebar-primary: oklch(0.64 0.13 170);
     --sidebar-primary-foreground: oklch(1 0 0);
-    --sidebar-accent: oklch(0.25 0.005 90);
-    --sidebar-accent-foreground: oklch(0.93 0.005 90);
-    --sidebar-border: oklch(0.98 0.005 90 / 10%);
-    --sidebar-ring: oklch(0.68 0.14 45);
+    --sidebar-accent: oklch(0.25 0.015 230);
+    --sidebar-accent-foreground: oklch(0.94 0.005 230);
+    --sidebar-border: oklch(0.31 0.015 230);
+    --sidebar-ring: oklch(0.64 0.13 170);
 }
 
 @theme inline {
