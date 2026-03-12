@@ -15,7 +15,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { SentIcon, Smile01Icon, UserGroupIcon } from "@hugeicons/core-free-icons"
+import { SentIcon, SmileIcon, UserGroupIcon } from "@hugeicons/core-free-icons"
 import type { Chat, Message } from "./types"
 import { MessageBubble } from "./message-bubble"
 import { EmojiPicker } from "./emoji-picker"
@@ -131,7 +131,7 @@ export function ChatPanel({ chat, messages, currentUserId, onSendMessage, onInpu
             <Popover open={pickerOpen} onOpenChange={setPickerOpen}>
               <PopoverTrigger asChild>
                 <InputGroupButton type="button" size="icon-sm" title="Emoji" aria-label="Open emoji picker">
-                  <HugeiconsIcon icon={Smile01Icon} strokeWidth={2} />
+                  <HugeiconsIcon icon={SmileIcon} strokeWidth={2} />
                 </InputGroupButton>
               </PopoverTrigger>
               <PopoverContent side="top" align="start" className="w-auto p-0 border-0 shadow-lg">
