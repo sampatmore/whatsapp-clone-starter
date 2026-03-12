@@ -6,74 +6,74 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-    /* WhatsApp palette - Light mode */
-    --background: oklch(0.95 0.005 250);              /* Panel gray #f0f2f5 */
-    --foreground: oklch(0.18 0.015 230);              /* Dark text #111b21 */
+    /* So Energy brand palette - Light mode */
+    --background: oklch(0.98 0.005 80);               /* Warm off-white #faf6f3 */
+    --foreground: oklch(0.14 0.000 0);                /* Midnight #1a1a1a */
     --card: oklch(1 0 0);                             /* White #ffffff */
-    --card-foreground: oklch(0.18 0.015 230);
+    --card-foreground: oklch(0.14 0.000 0);
     --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.18 0.015 230);
-    --primary: oklch(0.64 0.13 170);                  /* WhatsApp teal #00a884 */
-    --primary-foreground: oklch(1 0 0);
-    --secondary: oklch(0.96 0.04 145);                /* Sent message green #d9fdd3 */
-    --secondary-foreground: oklch(0.18 0.015 230);
-    --muted: oklch(0.93 0.01 85);                     /* Chat wallpaper beige #efeae2 */
-    --muted-foreground: oklch(0.53 0.02 230);         /* Secondary text #667781 */
-    --accent: oklch(0.94 0.005 250);                  /* Hover gray #e9edef */
-    --accent-foreground: oklch(0.18 0.015 230);
-    --destructive: oklch(0.55 0.22 25);
-    --border: oklch(0.92 0.005 230);                  /* Light border #e9edef */
-    --input: oklch(0.92 0.005 230);
-    --ring: oklch(0.64 0.13 170);                     /* Teal focus ring */
-    --chart-1: oklch(0.64 0.13 170);                  /* Teal */
-    --chart-2: oklch(0.55 0.02 230);                  /* Blue-gray */
-    --chart-3: oklch(0.76 0.17 155);                  /* WhatsApp green #25d366 */
-    --chart-4: oklch(0.52 0.10 175);                  /* Dark teal #008069 */
-    --chart-5: oklch(0.70 0.08 240);                  /* Light blue */
+    --popover-foreground: oklch(0.14 0.000 0);
+    --primary: oklch(0.95 0.22 126);                  /* Electric lime #cbfb00 */
+    --primary-foreground: oklch(0.14 0.000 0);        /* Black text on lime */
+    --secondary: oklch(0.92 0.005 220);               /* Light gray #f5f5f5 */
+    --secondary-foreground: oklch(0.14 0.000 0);
+    --muted: oklch(0.96 0.003 220);                   /* Pale #f5f5f5 */
+    --muted-foreground: oklch(0.47 0.008 220);        /* Muted text #6b737a */
+    --accent: oklch(0.91 0.008 75);                   /* Warm beige #e8e7e1 */
+    --accent-foreground: oklch(0.14 0.000 0);
+    --destructive: oklch(0.50 0.22 25);               /* Error red #d71831 */
+    --border: oklch(0.87 0.003 220);                  /* Border #dbdbdb */
+    --input: oklch(0.87 0.003 220);
+    --ring: oklch(0.95 0.22 126);                     /* Electric lime focus ring */
+    --chart-1: oklch(0.95 0.22 126);                  /* Electric #cbfb00 */
+    --chart-2: oklch(0.36 0.08 180);                  /* Dark teal #015c55 */
+    --chart-3: oklch(0.25 0.010 220);                 /* Deep dark #272b2f */
+    --chart-4: oklch(0.44 0.12 240);                  /* Link blue #0070a4 */
+    --chart-5: oklch(0.50 0.18 265);                  /* Focus blue #4d65ff */
     --radius: 0.75rem;
-    --sidebar: oklch(1 0 0);                          /* White sidebar */
-    --sidebar-foreground: oklch(0.18 0.015 230);
-    --sidebar-primary: oklch(0.64 0.13 170);
-    --sidebar-primary-foreground: oklch(1 0 0);
-    --sidebar-accent: oklch(0.94 0.005 250);
-    --sidebar-accent-foreground: oklch(0.18 0.015 230);
-    --sidebar-border: oklch(0.92 0.005 230);
-    --sidebar-ring: oklch(0.64 0.13 170);
+    --sidebar: oklch(0.96 0.003 220);                 /* Light gray #f5f5f5 */
+    --sidebar-foreground: oklch(0.14 0.000 0);
+    --sidebar-primary: oklch(0.95 0.22 126);
+    --sidebar-primary-foreground: oklch(0.14 0.000 0);
+    --sidebar-accent: oklch(0.91 0.008 75);
+    --sidebar-accent-foreground: oklch(0.14 0.000 0);
+    --sidebar-border: oklch(0.87 0.003 220);
+    --sidebar-ring: oklch(0.95 0.22 126);
 }
 
 .dark {
-    /* WhatsApp palette - Dark mode */
-    --background: oklch(0.15 0.015 230);              /* Deep dark #0b141a */
-    --foreground: oklch(0.94 0.005 230);              /* Light text #e9edef */
-    --card: oklch(0.18 0.015 230);                    /* Dark surface #111b21 */
-    --card-foreground: oklch(0.94 0.005 230);
-    --popover: oklch(0.18 0.015 230);
-    --popover-foreground: oklch(0.94 0.005 230);
-    --primary: oklch(0.64 0.13 170);                  /* WhatsApp teal #00a884 */
-    --primary-foreground: oklch(1 0 0);
-    --secondary: oklch(0.40 0.08 170);                /* Sent message dark green #005c4b */
-    --secondary-foreground: oklch(0.94 0.005 230);
-    --muted: oklch(0.25 0.015 230);                   /* Dark muted #202c33 */
-    --muted-foreground: oklch(0.63 0.02 230);         /* Gray text #8696a0 */
-    --accent: oklch(0.25 0.015 230);                  /* Hover dark #202c33 */
-    --accent-foreground: oklch(0.94 0.005 230);
-    --destructive: oklch(0.65 0.18 25);
-    --border: oklch(0.31 0.015 230);                  /* Dark border #2a3942 */
-    --input: oklch(0.31 0.015 230);
-    --ring: oklch(0.64 0.13 170);                     /* Teal focus ring */
-    --chart-1: oklch(0.64 0.13 170);                  /* Teal */
-    --chart-2: oklch(0.60 0.02 230);                  /* Blue-gray */
-    --chart-3: oklch(0.76 0.17 155);                  /* WhatsApp green */
-    --chart-4: oklch(0.52 0.10 175);                  /* Dark teal */
-    --chart-5: oklch(0.72 0.08 240);                  /* Light blue */
-    --sidebar: oklch(0.15 0.015 230);                 /* Deep dark */
-    --sidebar-foreground: oklch(0.94 0.005 230);
-    --sidebar-primary: oklch(0.64 0.13 170);
-    --sidebar-primary-foreground: oklch(1 0 0);
-    --sidebar-accent: oklch(0.25 0.015 230);
-    --sidebar-accent-foreground: oklch(0.94 0.005 230);
-    --sidebar-border: oklch(0.31 0.015 230);
-    --sidebar-ring: oklch(0.64 0.13 170);
+    /* So Energy brand palette - Dark mode */
+    --background: oklch(0.14 0.000 0);               /* Midnight #1a1a1a */
+    --foreground: oklch(0.97 0.000 0);               /* White #ffffff */
+    --card: oklch(0.19 0.005 220);                   /* Deep dark #272b2f */
+    --card-foreground: oklch(0.97 0.000 0);
+    --popover: oklch(0.19 0.005 220);
+    --popover-foreground: oklch(0.97 0.000 0);
+    --primary: oklch(0.95 0.22 126);                 /* Electric lime #cbfb00 */
+    --primary-foreground: oklch(0.14 0.000 0);
+    --secondary: oklch(0.25 0.005 220);              /* Slightly lighter dark */
+    --secondary-foreground: oklch(0.97 0.000 0);
+    --muted: oklch(0.22 0.005 220);                  /* Dark muted */
+    --muted-foreground: oklch(0.63 0.005 220);       /* #9da1a5 */
+    --accent: oklch(0.25 0.005 220);
+    --accent-foreground: oklch(0.97 0.000 0);
+    --destructive: oklch(0.55 0.22 25);
+    --border: oklch(0.27 0.005 220);                 /* Dark border */
+    --input: oklch(0.27 0.005 220);
+    --ring: oklch(0.95 0.22 126);                    /* Electric lime focus ring */
+    --chart-1: oklch(0.95 0.22 126);                 /* Electric */
+    --chart-2: oklch(0.42 0.08 180);                 /* Dark teal */
+    --chart-3: oklch(0.60 0.005 220);                /* Mid gray */
+    --chart-4: oklch(0.55 0.12 240);                 /* Blue */
+    --chart-5: oklch(0.58 0.18 265);                 /* Focus blue */
+    --sidebar: oklch(0.19 0.005 220);                /* Deep dark #272b2f */
+    --sidebar-foreground: oklch(0.97 0.000 0);
+    --sidebar-primary: oklch(0.95 0.22 126);
+    --sidebar-primary-foreground: oklch(0.14 0.000 0);
+    --sidebar-accent: oklch(0.25 0.005 220);
+    --sidebar-accent-foreground: oklch(0.97 0.000 0);
+    --sidebar-border: oklch(0.27 0.005 220);
+    --sidebar-ring: oklch(0.95 0.22 126);
 }
 
 @theme inline {
