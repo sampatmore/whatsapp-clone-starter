@@ -1,14 +1,23 @@
+import { useState } from "react"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { MessageMultiple02Icon, Message01Icon } from "@hugeicons/core-free-icons"
 import type { Chat } from "./types"
 import { ChatListItem } from "./chat-list-item"
+import { NewChatPopover } from "./new-chat-popover"
 
 interface ChatSidebarProps {
   chats: Chat[]
 }
 
 export function ChatSidebar({ chats }: ChatSidebarProps) {
+  const [popoverOpen, setPopoverOpen] = useState(false)
+
   const activeChats = chats
     .filter((chat) => !chat.archivedAt)
     .sort((a, b) => {
@@ -28,9 +37,16 @@ export function ChatSidebar({ chats }: ChatSidebarProps) {
     <div className="flex h-full w-full flex-col border-r border-border bg-card">
       <div className="flex h-[65px] items-center justify-between border-b border-border px-4">
         <h1 className="text-xl font-semibold">Chats</h1>
-        <button className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
-          <HugeiconsIcon icon={Message01Icon} strokeWidth={1.5} className="h-5 w-5" />
-        </button>
+        <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
+          <PopoverTrigger asChild>
+            <button className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
+              <HugeiconsIcon icon={Message01Icon} strokeWidth={1.5} className="h-5 w-5" />
+            </button>
+          </PopoverTrigger>
+          <PopoverContent side="bottom" align="end" className="w-72 p-0">
+            <NewChatPopover onClose={() => setPopoverOpen(false)} />
+          </PopoverContent>
+        </Popover>
       </div>
       {activeChats.length === 0 ? (
         <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
