@@ -30,6 +30,16 @@ export class ChatsPage {
     return this.page.locator('form button[type="submit"]')
   }
 
+  /** The emoji picker trigger button */
+  get emojiButton(): Locator {
+    return this.page.getByTitle('Emoji')
+  }
+
+  /** The emoji picker popover content */
+  get emojiPicker(): Locator {
+    return this.page.locator('em-emoji-picker')
+  }
+
   /** The h2 name shown in the chat panel header */
   chatHeader(name: string): Locator {
     return this.page.locator('h2').filter({ hasText: name })

@@ -1,4 +1,5 @@
 import { useState, useRef } from "react"
+import { flushSync } from "react-dom"
 import { useScrollToBottom } from "@/hooks/use-scroll-to-bottom"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -8,10 +9,16 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { SentIcon, UserGroupIcon } from "@hugeicons/core-free-icons"
+import { SentIcon, SmileIcon, UserGroupIcon } from "@hugeicons/core-free-icons"
 import type { Chat, Message } from "./types"
 import { MessageBubble } from "./message-bubble"
+import { EmojiPicker } from "./emoji-picker"
 
 
 interface ChatPanelProps {
@@ -26,8 +33,24 @@ interface ChatPanelProps {
 
 export function ChatPanel({ chat, messages, currentUserId, onSendMessage, onInputChange, typingUsers, senderNames }: ChatPanelProps) {
   const [inputValue, setInputValue] = useState("")
+  const [pickerOpen, setPickerOpen] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const messagesEndRef = useScrollToBottom([chat?.id, messages.length])
+
+  function insertEmoji(emoji: string) {
+    const input = inputRef.current
+    if (!input) {
+      setInputValue((prev) => prev + emoji)
+      return
+    }
+    const start = input.selectionStart ?? inputValue.length
+    const end = input.selectionEnd ?? inputValue.length
+    const next = inputValue.slice(0, start) + emoji + inputValue.slice(end)
+    flushSync(() => setInputValue(next))
+    input.focus()
+    const cursor = start + [...emoji].length
+    input.setSelectionRange(cursor, cursor)
+  }
 
   const isGroup = chat?.type === "group"
 
@@ -104,6 +127,18 @@ export function ChatPanel({ chat, messages, currentUserId, onSendMessage, onInpu
       {/* Input */}
       <form onSubmit={handleSubmit} className="border-t border-border bg-card p-4">
         <InputGroup className="h-10">
+          <InputGroupAddon align="inline-start">
+            <Popover open={pickerOpen} onOpenChange={setPickerOpen}>
+              <PopoverTrigger asChild>
+                <InputGroupButton type="button" size="icon-sm" title="Emoji" aria-label="Open emoji picker">
+                  <HugeiconsIcon icon={SmileIcon} strokeWidth={2} />
+                </InputGroupButton>
+              </PopoverTrigger>
+              <PopoverContent side="top" align="start" className="w-auto p-0 border-0 shadow-lg">
+                <EmojiPicker onEmojiSelect={insertEmoji} />
+              </PopoverContent>
+            </Popover>
+          </InputGroupAddon>
           <InputGroupInput
             ref={inputRef}
             placeholder="Type a message..."
