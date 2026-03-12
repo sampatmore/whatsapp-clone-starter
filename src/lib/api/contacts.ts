@@ -1,4 +1,3 @@
-import type { Chat } from "@/components/chat/types"
 import {
   mockContacts,
   mockPendingRequests,

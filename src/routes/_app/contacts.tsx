@@ -317,8 +317,9 @@ function AddContactDialog() {
           setSuccess(false)
         }, 1500)
       },
-      onError: (err: any) => {
-        setError(err.response?.data?.error || "Failed to send request")
+      onError: (err: unknown) => {
+        const apiError = err as { response?: { data?: { error?: string } } }
+        setError(apiError.response?.data?.error || "Failed to send request")
       },
     })
   }
