@@ -1,38 +1,71 @@
-name: E2E Tests
+name: CI
 
 on:
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
-  e2e:
-    name: Playwright E2E
+  # Fast gate: lint + typecheck (~20s). Runs in parallel with e2e so it
+  # doesn't add to wall-clock time on the happy path.
+  checks:
+    name: Lint & Type Check
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v4
         with:
           version: '10'
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
 
-      - name: Install Playwright browsers
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm lint
+
+      - run: pnpm exec tsc --noEmit
+
+  e2e:
+    name: Playwright E2E
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '10'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      # Cache the Chromium binary (~90MB) keyed on the Playwright version.
+      # On a cache hit we still need to install system deps (apt packages),
+      # but skip the slow browser download entirely.
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('**/package.json') }}
+
+      - name: Install Playwright browser + system deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: pnpm exec playwright install chromium --with-deps
 
-      - name: Run E2E tests
-        run: pnpm test:e2e
+      - name: Install Playwright system deps only (browser cached)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: pnpm exec playwright install-deps chromium
 
-      - name: Upload test report on failure
+      - run: pnpm test:e2e
+
+      - name: Upload report on failure
         if: failure()
         uses: actions/upload-artifact@v4
         with:
@@ -41,8 +74,8 @@ jobs:
           retention-days: 7
 
   auto-merge:
-    name: Auto-merge on passing tests
-    needs: e2e
+    name: Auto-merge
+    needs: [checks, e2e]
     runs-on: ubuntu-latest
     if: success()
 
@@ -51,8 +84,7 @@ jobs:
       contents: write
 
     steps:
-      - name: Merge pull request
-        uses: actions/github-script@v7
+      - uses: actions/github-script@v7
         with:
           script: |
             await github.rest.pulls.merge({
